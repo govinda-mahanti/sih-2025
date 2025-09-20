@@ -59,10 +59,11 @@ const HomePage = () => {
       </section>
       {/* Additional Sections */}
       {/* ////////////////////////////////////////////////////////////////////////////////// */}
-      <FeatureCard />
-      <section>
-        <GetStarted />
-      </section>
+      {/*  <FeatureCard /> */}
+
+      <section id="services"></section>
+      <section id="features"></section>
+      <section id="footer"></section>
     </div>
   );
 };
