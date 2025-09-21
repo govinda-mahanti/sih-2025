@@ -355,7 +355,7 @@ const Features = () => {
       </div>
 
       {/* Additional Features Strip */}
-      <div className="mt-20 bg-gradient-to-r from-purple-600 to-indigo-600 py-12">
+      {/* <div className="mt-20 bg-gradient-to-r from-purple-600 to-indigo-600 py-12">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-8">
             <h3 className="text-3xl font-bold text-white mb-4">
@@ -440,7 +440,7 @@ const Features = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

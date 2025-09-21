@@ -50,7 +50,6 @@ const HomePage = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
             <div className="space-y-8">
               <div className="space-y-4">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
@@ -93,7 +92,7 @@ const HomePage = () => {
       {/* ////////////////////////////////////////////////////////////////////////////////// */}
       <FeatureCard />
       <section>
-        <GetStarted />
+        {/* <GetStarted /> */}
       </section>
 
 
@@ -149,6 +148,11 @@ const HomePage = () => {
         </div>
       </div>
     </section>
+      {/*  <FeatureCard /> */}
+
+      <section id="services"></section>
+      <section id="features"></section>
+      <section id="footer"></section>
     </div>
   );
 };
