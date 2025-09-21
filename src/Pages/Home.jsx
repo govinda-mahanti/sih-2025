@@ -1,11 +1,43 @@
-import React from "react";
 import Navbar from "../components/Navbar";
 import GetStarted from "../components/GetStarted";
 import heroimg from "../assets/heroImg.png";
 import { Rocket } from "lucide-react";
 import FeatureCard from "../Pages/Features";
+import { motion, AnimatePresence } from 'framer-motion';
+import { Plus, Minus } from 'lucide-react';
+import { useState } from "react";
 
+
+ const faqs = [
+    {
+      question: "How is student data protected?",
+      answer: "Student data (trauma history, sessions, sensor readings) is stored in an encrypted database, and for calls/consultations only anonymous IDs are shown to protect privacy."
+    },
+    {
+      question: "Can colleges see individual student details?",
+      answer: "No, colleges can only access aggregate statistical data (overall mental health trends, session participation, stress levels). Individual student records remain private."
+    },
+    {
+      question: "How does the VR/AI system personalize sessions?",
+      answer: "Using mind sensors, the system detects emotions and mental state before VR. Based on this, it generates a custom VR environment to improve focus, reduce anxiety, or enhance relaxation."
+    },
+    {
+      question: "Who can respond to student counseling requests?",
+      answer: "Students can connect with: AI-powered video consultations, Volunteers and counselors from their university, and Certified doctors/psychologists. The system suggests matches based on location, hostel, or gender preferences."
+    },
+    {
+      question: "Are there additional wellness resources available?",
+      answer: "Yes, students can join college yoga/meditation sessions, group discussions, and workshops. They also get access to self-help tools like guided meditations, stress trackers, and emotion dashboards."
+    }
+  ];
 const HomePage = () => {
+
+    const [openFaqIndex, setOpenFaqIndex] = useState(null);
+
+  const toggleFAQ = (index) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -63,6 +95,60 @@ const HomePage = () => {
       <section>
         <GetStarted />
       </section>
+
+
+       <section className="bg-gray-50 text-gray-900 py-20 px-6 md:px-24">
+      <div className="max-w-4xl mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl font-bold mb-12 text-center text-gray-800"
+        >
+          Frequently Asked Questions
+        </motion.h2>
+
+        <div className="space-y-6">
+          {faqs.map((faq, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-white p-6 rounded-xl shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-300"
+            >
+              <div
+                onClick={() => toggleFAQ(index)}
+                className="flex justify-between items-center cursor-pointer"
+              >
+                <h3 className="text-lg font-semibold text-gray-800 pr-4">{faq.question}</h3>
+                <div className="text-blue-600 flex-shrink-0">
+                  {openFaqIndex === index ? (
+                    <Minus size={18} />
+                  ) : (
+                    <Plus size={18} />
+                  )}
+                </div>
+              </div>
+
+              <AnimatePresence>
+                {openFaqIndex === index && (
+                  <motion.p
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-gray-600 mt-4 leading-relaxed"
+                  >
+                    {faq.answer}
+                  </motion.p>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
     </div>
   );
 };
