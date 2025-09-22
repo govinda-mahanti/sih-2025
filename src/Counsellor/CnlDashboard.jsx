@@ -1,1198 +1,548 @@
-import React, { useState } from "react";
-import {
-  LineChart,
-  Line,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-} from "recharts";
-import {
-  Bell,
-  Search,
-  Calendar,
-  MessageCircle,
-  Video,
-  AlertTriangle,
-  Shield,
-  Users,
-  User,
-  FileText,
-  TrendingUp,
-  Clock,
-  Phone,
-  BookOpen,
-  Settings,
-  Eye,
-  Activity,
-  Brain,
-  Heart,
-  ChevronRight,
-  ChevronDown,
-  Plus,
-  Send,
-  Filter,
-  Download,
-  Share2,
-  Lock,
-  CheckCircle,
-  XCircle,
-  AlertCircle,
-  Zap,
-  Target,
-  Moon,
-} from "lucide-react";
+import React, { useState } from 'react';
+import { Users, MessageCircle, Calendar, Clock, Heart, TrendingUp, Bell, Settings, User, MapPin, Phone, Video, CheckCircle, XCircle, Star, AlertCircle, UserCheck } from 'lucide-react';
 
-const CounselorDashboard = () => {
-  const [selectedStudent, setSelectedStudent] = useState(null);
-  const [activeTab, setActiveTab] = useState("overview");
-  const [showAlerts, setShowAlerts] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [riskFilter, setRiskFilter] = useState("all");
-  const [newNote, setNewNote] = useState("");
+const CnlDashboard = () => {
+  const [selectedTab, setSelectedTab] = useState('overview');
 
-  // Mock data for students
-  const students = [
+  // Counselor data
+  const counselorData = {
+    id: 'COUN-2024-003',
+    name: 'Sarah Johnson',
+    batch: '2021',
+    degree: 'Psychology',
+    hostel: 'Rose Hall',
+    room: 'B-204',
+    gender: 'Female',
+    totalSessions: 89,
+    activeConnections: 7,
+    rating: 4.6,
+    availability: 'Available'
+  };
+
+  // Student connection requests
+  const connectionRequests = [
     {
-      id: "STU-001",
-      pseudonym: "Student Alpha",
-      riskLevel: "high",
-      lastActive: "2024-08-16",
-      wellnessScore: 35,
-      currentMood: 3,
-      stressLevel: 8,
-      anxietyLevel: 7,
-      recentAssessments: {
-        phq9: { score: 15, date: "2024-08-15", level: "Moderate Depression" },
-        gad7: { score: 12, date: "2024-08-14", level: "Moderate Anxiety" },
-      },
-      trends: [
-        { date: "Aug 10", mood: 5, stress: 6, anxiety: 5 },
-        { date: "Aug 11", mood: 4, stress: 7, anxiety: 6 },
-        { date: "Aug 12", mood: 3, stress: 8, anxiety: 7 },
-        { date: "Aug 13", mood: 2, stress: 9, anxiety: 8 },
-        { date: "Aug 14", mood: 3, stress: 8, anxiety: 7 },
-        { date: "Aug 15", mood: 4, stress: 7, anxiety: 6 },
-        { date: "Aug 16", mood: 3, stress: 8, anxiety: 7 },
-      ],
-      notes: [
-        {
-          date: "2024-08-15",
-          counselor: "Dr. Smith",
-          content:
-            "Student reports increased academic pressure. Recommended CBT anxiety module. Follow-up scheduled.",
-          type: "session",
-        },
-        {
-          date: "2024-08-12",
-          counselor: "Dr. Smith",
-          content:
-            "Initial assessment completed. High stress indicators related to upcoming exams.",
-          type: "assessment",
-        },
-      ],
-      engagementMetrics: {
-        sessionsAttended: 3,
-        modulesCompleted: 2,
-        lastLogin: "2024-08-16 14:30",
-        streakDays: 5,
-      },
+      id: 'REQ-001',
+      studentId: 'STU-2024-234',
+      gender: 'Female',
+      hostelBlock: 'Rose Hall',
+      roomArea: 'B-Block',
+      requestTime: '2025-09-22 10:30 AM',
+      reason: 'Academic stress and anxiety',
+      preferredMode: 'in-person',
+      urgency: 'medium',
+      status: 'pending'
     },
     {
-      id: "STU-002",
-      pseudonym: "Student Beta",
-      riskLevel: "moderate",
-      lastActive: "2024-08-16",
-      wellnessScore: 65,
-      currentMood: 6,
-      stressLevel: 5,
-      anxietyLevel: 4,
-      recentAssessments: {
-        phq9: { score: 8, date: "2024-08-15", level: "Mild Depression" },
-        gad7: { score: 6, date: "2024-08-14", level: "Mild Anxiety" },
-      },
-      trends: [
-        { date: "Aug 10", mood: 6, stress: 4, anxiety: 3 },
-        { date: "Aug 11", mood: 7, stress: 3, anxiety: 3 },
-        { date: "Aug 12", mood: 5, stress: 6, anxiety: 5 },
-        { date: "Aug 13", mood: 6, stress: 5, anxiety: 4 },
-        { date: "Aug 14", mood: 7, stress: 4, anxiety: 3 },
-        { date: "Aug 15", mood: 6, stress: 5, anxiety: 4 },
-        { date: "Aug 16", mood: 6, stress: 5, anxiety: 4 },
-      ],
-      notes: [
-        {
-          date: "2024-08-14",
-          counselor: "Dr. Johnson",
-          content:
-            "Positive progress noted. Student engaging well with mindfulness exercises.",
-          type: "session",
-        },
-      ],
-      engagementMetrics: {
-        sessionsAttended: 5,
-        modulesCompleted: 4,
-        lastLogin: "2024-08-16 10:15",
-        streakDays: 12,
-      },
+      id: 'REQ-002',
+      studentId: 'STU-2024-156',
+      gender: 'Female',
+      hostelBlock: 'Rose Hall',
+      roomArea: 'A-Block',
+      requestTime: '2025-09-22 11:15 AM',
+      reason: 'Social isolation and loneliness',
+      preferredMode: 'online',
+      urgency: 'low',
+      status: 'pending'
     },
     {
-      id: "STU-003",
-      pseudonym: "Student Gamma",
-      riskLevel: "low",
-      lastActive: "2024-08-16",
-      wellnessScore: 85,
-      currentMood: 8,
-      stressLevel: 2,
-      anxietyLevel: 2,
-      recentAssessments: {
-        phq9: { score: 3, date: "2024-08-15", level: "Minimal Depression" },
-        gad7: { score: 2, date: "2024-08-14", level: "Minimal Anxiety" },
-      },
-      trends: [
-        { date: "Aug 10", mood: 8, stress: 3, anxiety: 2 },
-        { date: "Aug 11", mood: 9, stress: 2, anxiety: 1 },
-        { date: "Aug 12", mood: 7, stress: 3, anxiety: 3 },
-        { date: "Aug 13", mood: 8, stress: 2, anxiety: 2 },
-        { date: "Aug 14", mood: 8, stress: 2, anxiety: 2 },
-        { date: "Aug 15", mood: 9, stress: 1, anxiety: 1 },
-        { date: "Aug 16", mood: 8, stress: 2, anxiety: 2 },
-      ],
-      notes: [
-        {
-          date: "2024-08-13",
-          counselor: "Dr. Wilson",
-          content:
-            "Maintenance check-in. Student doing well, continue current wellness plan.",
-          type: "session",
-        },
-      ],
-      engagementMetrics: {
-        sessionsAttended: 2,
-        modulesCompleted: 6,
-        lastLogin: "2024-08-16 16:45",
-        streakDays: 18,
-      },
-    },
+      id: 'REQ-003',
+      studentId: 'STU-2024-298',
+      gender: 'Female',
+      hostelBlock: 'Rose Hall',
+      roomArea: 'C-Block',
+      requestTime: '2025-09-22 02:45 PM',
+      reason: 'Relationship issues and emotional support',
+      preferredMode: 'in-person',
+      urgency: 'high',
+      status: 'pending'
+    }
   ];
 
-  // Real-time alerts
-  const alerts = [
+  // Active counseling sessions
+  const activeSessions = [
     {
-      id: 1,
-      studentId: "STU-001",
-      type: "high_risk",
-      message: "Student Alpha wellness score dropped below 40",
-      timestamp: "2024-08-16 15:30",
-      priority: "urgent",
+      id: 'SESS-001',
+      studentId: 'STU-2024-087',
+      startDate: '2025-09-15',
+      sessionCount: 4,
+      nextSession: '2025-09-24 3:00 PM',
+      mode: 'in-person',
+      location: 'Rose Hall Common Room',
+      progress: 'Good progress',
+      notes: 'Student showing improvement in managing stress'
     },
     {
-      id: 2,
-      studentId: "STU-004",
-      type: "missed_session",
-      message: "Student Delta missed scheduled session",
-      timestamp: "2024-08-16 14:00",
-      priority: "medium",
+      id: 'SESS-002',
+      studentId: 'STU-2024-145',
+      startDate: '2025-09-18',
+      sessionCount: 2,
+      nextSession: '2025-09-23 7:00 PM',
+      mode: 'online',
+      location: 'Video Call',
+      progress: 'Moderate progress',
+      notes: 'Working on social anxiety and confidence building'
     },
     {
-      id: 3,
-      studentId: "STU-002",
-      type: "assessment_due",
-      message: "Student Beta assessment reminder due",
-      timestamp: "2024-08-16 12:00",
-      priority: "low",
-    },
+      id: 'SESS-003',
+      studentId: 'STU-2024-203',
+      startDate: '2025-09-20',
+      sessionCount: 1,
+      nextSession: '2025-09-25 4:30 PM',
+      mode: 'in-person',
+      location: 'Garden Area',
+      progress: 'Initial assessment',
+      notes: 'New connection, building trust and rapport'
+    }
   ];
 
-  // Aggregate analytics
-  const aggregateData = {
-    totalStudents: 156,
-    activeToday: 98,
-    highRisk: 12,
-    moderateRisk: 34,
-    lowRisk: 110,
-    averageWellnessScore: 72,
-    sessionsThisWeek: 45,
-    engagement: {
-      selfHelpModules: 78,
-      vrSessions: 23,
-      counselingSessions: 45,
-      chatInteractions: 156,
+  // Recent completed sessions
+  const recentSessions = [
+    {
+      id: 'COMP-001',
+      studentId: 'STU-2024-***',
+      date: '2025-09-21',
+      duration: '45 min',
+      mode: 'in-person',
+      outcome: 'Positive session',
+      rating: 5,
+      feedback: 'Very helpful and understanding counselor'
     },
-  };
+    {
+      id: 'COMP-002',
+      studentId: 'STU-2024-***',
+      date: '2025-09-20',
+      duration: '30 min',
+      mode: 'online',
+      outcome: 'Follow-up required',
+      rating: 4,
+      feedback: 'Good guidance, need more sessions'
+    },
+    {
+      id: 'COMP-003',
+      studentId: 'STU-2024-***',
+      date: '2025-09-19',
+      duration: '60 min',
+      mode: 'in-person',
+      outcome: 'Issue resolved',
+      rating: 5,
+      feedback: 'Excellent support during difficult time'
+    }
+  ];
 
-  const getRiskColor = (level) => {
-    switch (level) {
-      case "high":
-        return "text-red-400 bg-red-600";
-      case "moderate":
-        return "text-yellow-400 bg-yellow-600";
-      case "low":
-        return "text-green-400 bg-green-600";
-      default:
-        return "text-gray-400 bg-gray-600";
+  // Weekly activity stats
+  const weeklyStats = [
+    { day: 'Mon', sessions: 2 },
+    { day: 'Tue', sessions: 3 },
+    { day: 'Wed', sessions: 1 },
+    { day: 'Thu', sessions: 4 },
+    { day: 'Fri', sessions: 2 },
+    { day: 'Sat', sessions: 1 },
+    { day: 'Sun', sessions: 1 }
+  ];
+
+  // Handle connection request
+  const handleConnectionRequest = (requestId, action) => {
+    if (action === 'accept') {
+      alert(`Connection request ${requestId} accepted. You can now reach out to the student.`);
+    } else {
+      alert(`Connection request ${requestId} declined.`);
     }
   };
 
-  const getRiskBorderColor = (level) => {
-    switch (level) {
-      case "high":
-        return "border-red-400";
-      case "moderate":
-        return "border-yellow-400";
-      case "low":
-        return "border-green-400";
-      default:
-        return "border-gray-400";
-    }
+  // Get urgency color
+  const getUrgencyColor = (urgency) => {
+    const colors = {
+      'high': 'bg-red-100 text-red-800',
+      'medium': 'bg-yellow-100 text-yellow-800',
+      'low': 'bg-green-100 text-green-800'
+    };
+    return colors[urgency] || 'bg-gray-100 text-gray-800';
   };
 
-  const filteredStudents = students.filter((student) => {
-    const matchesSearch =
-      student.pseudonym.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      student.id.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesRisk =
-      riskFilter === "all" || student.riskLevel === riskFilter;
-    return matchesSearch && matchesRisk;
-  });
-
-  const handleAddNote = () => {
-    if (newNote.trim() && selectedStudent) {
-      const note = {
-        date: new Date().toISOString().split("T")[0],
-        counselor: "Current User",
-        content: newNote,
-        type: "note",
-      };
-      // In a real app, this would update the backend
-      setNewNote("");
-    }
+  // Get progress color
+  const getProgressColor = (progress) => {
+    if (progress.includes('Good')) return 'text-green-600';
+    if (progress.includes('Moderate')) return 'text-yellow-600';
+    if (progress.includes('Initial')) return 'text-blue-600';
+    return 'text-gray-600';
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      {/* Top Navigation Bar */}
-      <div className="bg-gray-800 border-b border-gray-700 px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <h1 className="text-2xl font-bold text-white">
-              Counselor Dashboard
-            </h1>
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search students..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="bg-gray-700 text-white pl-10 pr-4 py-2 rounded-lg w-64 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <Heart className="h-8 w-8 text-pink-600 mr-3" />
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">Counselor Portal</h1>
+                <p className="text-sm text-gray-600">Welcome back, {counselorData.name}</p>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center space-x-4">
-            <button
-              onClick={() => setShowAlerts(!showAlerts)}
-              className="relative p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
-            >
-              <Bell className="w-5 h-5" />
-              {alerts.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                  {alerts.length}
-                </span>
-              )}
-            </button>
-            <button className="p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
-              <Calendar className="w-5 h-5" />
-            </button>
-            <button className="p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors">
-              <Settings className="w-5 h-5" />
-            </button>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center bg-green-50 text-green-700 px-3 py-2 rounded-lg">
+                <UserCheck className="h-4 w-4 mr-2" />
+                <span className="text-sm font-medium">{counselorData.availability}</span>
+              </div>
+              <div className="flex items-center bg-blue-50 text-blue-700 px-3 py-2 rounded-lg">
+                <Users className="h-4 w-4 mr-2" />
+                <span className="text-sm font-medium">{counselorData.activeConnections} Active</span>
+              </div>
+              <Bell className="h-6 w-6 text-gray-600 cursor-pointer hover:text-gray-800" />
+              <Settings className="h-6 w-6 text-gray-600 cursor-pointer hover:text-gray-800" />
+              <div className="flex items-center bg-gray-100 rounded-lg px-3 py-2">
+                <User className="h-5 w-5 text-gray-600 mr-2" />
+                <span className="text-sm font-medium text-gray-800">{counselorData.id}</span>
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* Alerts Dropdown */}
-        {showAlerts && (
-          <div className="absolute right-6 top-16 w-80 bg-gray-800 border border-gray-700 rounded-lg shadow-xl z-50">
-            <div className="p-4 border-b border-gray-700">
-              <h3 className="font-semibold text-white">Recent Alerts</h3>
-            </div>
-            <div className="max-h-64 overflow-y-auto">
-              {alerts.map((alert) => (
-                <div
-                  key={alert.id}
-                  className="p-3 border-b border-gray-700 hover:bg-gray-700"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <p className="text-sm text-white">{alert.message}</p>
-                      <p className="text-xs text-gray-400 mt-1">
-                        {alert.timestamp}
-                      </p>
-                    </div>
-                    <span
-                      className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        alert.priority === "urgent"
-                          ? "bg-red-600 bg-opacity-20 text-red-400"
-                          : alert.priority === "medium"
-                          ? "bg-yellow-600 bg-opacity-20 text-yellow-400"
-                          : "bg-blue-600 bg-opacity-20 text-blue-400"
-                      }`}
-                    >
-                      {alert.priority}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
 
-      <div className="flex h-screen">
-        {/* Left Sidebar */}
-        <div className="w-80 bg-gray-800 border-r border-gray-700 overflow-y-auto">
-          {/* Quick Stats */}
-          <div className="p-4 border-b border-gray-700">
-            <h2 className="font-semibold text-white mb-3">Overview</h2>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-gray-700 p-3 rounded-lg">
-                <div className="text-2xl font-bold text-purple-400">
-                  {aggregateData.totalStudents}
-                </div>
-                <div className="text-xs text-gray-400">Total Students</div>
+      <div className="max-w-7xl mx-auto p-6">
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Total Sessions</p>
+                <p className="text-3xl font-bold text-blue-600">{counselorData.totalSessions}</p>
               </div>
-              <div className="bg-gray-700 p-3 rounded-lg">
-                <div className="text-2xl font-bold text-green-400">
-                  {aggregateData.activeToday}
-                </div>
-                <div className="text-xs text-gray-400">Active Today</div>
-              </div>
-            </div>
-            <div className="grid grid-cols-3 gap-2 mt-3">
-              <div className="bg-red-600 bg-opacity-20 p-2 rounded text-center">
-                <div className="text-lg font-bold text-red-400">
-                  {aggregateData.highRisk}
-                </div>
-                <div className="text-xs text-red-300">High Risk</div>
-              </div>
-              <div className="bg-yellow-600 bg-opacity-20 p-2 rounded text-center">
-                <div className="text-lg font-bold text-yellow-400">
-                  {aggregateData.moderateRisk}
-                </div>
-                <div className="text-xs text-yellow-300">Moderate</div>
-              </div>
-              <div className="bg-green-600 bg-opacity-20 p-2 rounded text-center">
-                <div className="text-lg font-bold text-green-400">
-                  {aggregateData.lowRisk}
-                </div>
-                <div className="text-xs text-green-300">Low Risk</div>
-              </div>
+              <MessageCircle className="h-12 w-12 text-blue-500" />
             </div>
           </div>
-
-          {/* Filter Controls */}
-          <div className="p-4 border-b border-gray-700">
-            <div className="flex items-center space-x-2 mb-3">
-              <Filter className="w-4 h-4 text-gray-400" />
-              <span className="text-sm text-gray-400">
-                Filter by Risk Level
-              </span>
+          <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Active Connections</p>
+                <p className="text-3xl font-bold text-green-600">{counselorData.activeConnections}</p>
+              </div>
+              <Users className="h-12 w-12 text-green-500" />
             </div>
-            <select
-              value={riskFilter}
-              onChange={(e) => setRiskFilter(e.target.value)}
-              className="w-full bg-gray-700 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-            >
-              <option value="all">All Students</option>
-              <option value="high">High Risk</option>
-              <option value="moderate">Moderate Risk</option>
-              <option value="low">Low Risk</option>
-            </select>
           </div>
-
-          {/* Student List */}
-          <div className="p-4">
-            <h3 className="font-semibold text-white mb-3">
-              Students ({filteredStudents.length})
-            </h3>
-            <div className="space-y-2">
-              {filteredStudents.map((student) => (
-                <div
-                  key={student.id}
-                  onClick={() => setSelectedStudent(student)}
-                  className={`p-3 rounded-lg cursor-pointer transition-colors border-l-4 ${
-                    selectedStudent?.id === student.id
-                      ? "bg-purple-600 bg-opacity-20 border-purple-400"
-                      : `bg-gray-700 hover:bg-gray-600 ${getRiskBorderColor(
-                          student.riskLevel
-                        )}`
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="font-medium text-white">
-                      {student.pseudonym}
-                    </div>
-                    <div
-                      className={`px-2 py-1 rounded-full text-xs font-medium bg-opacity-20 ${getRiskColor(
-                        student.riskLevel
-                      )}`}
-                    >
-                      {student.riskLevel}
-                    </div>
-                  </div>
-                  <div className="text-xs text-gray-400">
-                    ID: {student.id} • Score: {student.wellnessScore}
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    Last active: {student.lastActive}
-                  </div>
-                </div>
-              ))}
+          <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-yellow-500">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Average Rating</p>
+                <p className="text-3xl font-bold text-yellow-600">{counselorData.rating}</p>
+              </div>
+              <Star className="h-12 w-12 text-yellow-500" />
+            </div>
+          </div>
+          <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-500">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">This Week</p>
+                <p className="text-3xl font-bold text-purple-600">{weeklyStats.reduce((sum, day) => sum + day.sessions, 0)}</p>
+              </div>
+              <TrendingUp className="h-12 w-12 text-purple-500" />
             </div>
           </div>
         </div>
 
-        {/* Main Content Area */}
-        <div className="flex-1 flex flex-col">
-          {selectedStudent ? (
-            <>
-              {/* Student Header */}
-              <div className="bg-gray-800 border-b border-gray-700 p-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
-                      <User className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h2 className="text-xl font-bold text-white">
-                        {selectedStudent.pseudonym}
-                      </h2>
-                      <p className="text-sm text-gray-400">
-                        ID: {selectedStudent.id}
-                      </p>
-                    </div>
-                    <div
-                      className={`px-3 py-1 rounded-full text-sm font-medium bg-opacity-20 ${getRiskColor(
-                        selectedStudent.riskLevel
-                      )}`}
-                    >
-                      {selectedStudent.riskLevel.charAt(0).toUpperCase() +
-                        selectedStudent.riskLevel.slice(1)}{" "}
-                      Risk
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white text-sm font-medium transition-colors flex items-center">
-                      <Video className="w-4 h-4 mr-2" />
-                      Start Session
-                    </button>
-                    <button className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-white text-sm font-medium transition-colors flex items-center">
-                      <MessageCircle className="w-4 h-4 mr-2" />
-                      Message
-                    </button>
-                    <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-white text-sm font-medium transition-colors flex items-center">
-                      <Shield className="w-4 h-4 mr-2" />
-                      Emergency
-                    </button>
-                  </div>
-                </div>
-              </div>
+        {/* Navigation Tabs */}
+        <div className="bg-white rounded-lg shadow-md mb-8">
+          <div className="border-b border-gray-200">
+            <nav className="flex space-x-8 px-6">
+              {[
+                { key: 'overview', label: 'Overview' },
+                { key: 'requests', label: 'Connection Requests' },
+                { key: 'active', label: 'Active Sessions' },
+                { key: 'history', label: 'Recent Sessions' }
+              ].map((tab) => (
+                <button
+                  key={tab.key}
+                  onClick={() => setSelectedTab(tab.key)}
+                  className={`py-4 px-2 border-b-2 font-medium text-sm ${
+                    selectedTab === tab.key
+                      ? 'border-pink-500 text-pink-600'
+                      : 'border-transparent text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </nav>
+          </div>
 
-              {/* Tab Navigation */}
-              <div className="bg-gray-800 border-b border-gray-700 px-6">
-                <div className="flex space-x-6">
-                  {[
-                    { key: "overview", label: "Overview", icon: TrendingUp },
-                    { key: "assessments", label: "Assessments", icon: Brain },
-                    { key: "notes", label: "Case Notes", icon: FileText },
-                    { key: "engagement", label: "Engagement", icon: Activity },
-                  ].map((tab) => (
-                    <button
-                      key={tab.key}
-                      onClick={() => setActiveTab(tab.key)}
-                      className={`flex items-center space-x-2 py-3 px-1 border-b-2 transition-colors ${
-                        activeTab === tab.key
-                          ? "border-purple-400 text-purple-400"
-                          : "border-transparent text-gray-400 hover:text-white"
-                      }`}
-                    >
-                      <tab.icon className="w-4 h-4" />
-                      <span>{tab.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Tab Content */}
-              <div className="flex-1 overflow-y-auto p-6">
-                {activeTab === "overview" && (
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {/* Wellness Metrics */}
-                    <div className="lg:col-span-2 bg-gray-800 rounded-xl p-6 border border-gray-700">
-                      <h3 className="text-lg font-semibold text-white mb-4">
-                        Wellness Trends
-                      </h3>
-                      <ResponsiveContainer width="100%" height={300}>
-                        <LineChart data={selectedStudent.trends}>
-                          <CartesianGrid
-                            strokeDasharray="3 3"
-                            stroke="#374151"
-                          />
-                          <XAxis dataKey="date" stroke="#9CA3AF" />
-                          <YAxis domain={[0, 10]} stroke="#9CA3AF" />
-                          <Tooltip
-                            contentStyle={{
-                              backgroundColor: "#1F2937",
-                              border: "1px solid #374151",
-                              borderRadius: "8px",
-                              color: "white",
-                            }}
-                          />
-                          <Line
-                            type="monotone"
-                            dataKey="mood"
-                            stroke="#10B981"
-                            strokeWidth={2}
-                            name="Mood"
-                          />
-                          <Line
-                            type="monotone"
-                            dataKey="stress"
-                            stroke="#EF4444"
-                            strokeWidth={2}
-                            name="Stress"
-                          />
-                          <Line
-                            type="monotone"
-                            dataKey="anxiety"
-                            stroke="#F59E0B"
-                            strokeWidth={2}
-                            name="Anxiety"
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
-                    </div>
-
-                    {/* Current Status */}
-                    <div className="space-y-6">
-                      {/* Wellness Score */}
-                      <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                        <h3 className="text-lg font-semibold text-white mb-4">
-                          Current Status
-                        </h3>
-                        <div className="space-y-4">
-                          <div className="flex items-center justify-between">
-                            <span className="text-gray-400">
-                              Wellness Score
-                            </span>
-                            <span
-                              className={`text-2xl font-bold ${
-                                selectedStudent.wellnessScore >= 70
-                                  ? "text-green-400"
-                                  : selectedStudent.wellnessScore >= 40
-                                  ? "text-yellow-400"
-                                  : "text-red-400"
-                              }`}
-                            >
-                              {selectedStudent.wellnessScore}
-                            </span>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <span className="text-gray-400">Mood</span>
-                            <span className="text-green-400">
-                              {selectedStudent.currentMood}/10
-                            </span>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <span className="text-gray-400">Stress</span>
-                            <span className="text-red-400">
-                              {selectedStudent.stressLevel}/10
-                            </span>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <span className="text-gray-400">Anxiety</span>
-                            <span className="text-yellow-400">
-                              {selectedStudent.anxietyLevel}/10
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Quick Actions */}
-                      <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                        <h3 className="text-lg font-semibold text-white mb-4">
-                          Quick Actions
-                        </h3>
-                        <div className="space-y-2">
-                          <button className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg text-sm transition-colors flex items-center">
-                            <Calendar className="w-4 h-4 mr-2" />
-                            Schedule Follow-up
-                          </button>
-                          <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm transition-colors flex items-center">
-                            <BookOpen className="w-4 h-4 mr-2" />
-                            Assign Resources
-                          </button>
-                          <button className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg text-sm transition-colors flex items-center">
-                            <Share2 className="w-4 h-4 mr-2" />
-                            Share Care Plan
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {activeTab === "assessments" && (
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                      <h3 className="text-lg font-semibold text-white mb-4">
-                        Recent Assessments
-                      </h3>
-                      <div className="space-y-4">
-                        {Object.entries(selectedStudent.recentAssessments).map(
-                          ([key, assessment]) => (
-                            <div
-                              key={key}
-                              className="p-4 bg-gray-700 rounded-lg"
-                            >
-                              <div className="flex items-center justify-between mb-2">
-                                <h4 className="font-medium text-white">
-                                  {key.toUpperCase()}
-                                </h4>
-                                <span className="text-sm text-gray-400">
-                                  {assessment.date}
-                                </span>
-                              </div>
-                              <div className="flex items-center justify-between">
-                                <span className="text-gray-400">
-                                  {assessment.level}
-                                </span>
-                                <span
-                                  className={`px-3 py-1 rounded-full text-sm font-medium ${
-                                    assessment.score <= 5
-                                      ? "bg-green-600 bg-opacity-20 text-green-400"
-                                      : assessment.score <= 10
-                                      ? "bg-yellow-600 bg-opacity-20 text-yellow-400"
-                                      : "bg-red-600 bg-opacity-20 text-red-400"
-                                  }`}
-                                >
-                                  {assessment.score}
-                                </span>
-                              </div>
-                            </div>
-                          )
-                        )}
-                      </div>
-                      <button className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors">
-                        Schedule New Assessment
-                      </button>
-                    </div>
-
-                    <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                      <h3 className="text-lg font-semibold text-white mb-4">
-                        Care Plan
-                      </h3>
-                      <div className="space-y-3">
-                        <div className="flex items-center space-x-3 p-3 bg-gray-700 rounded-lg">
-                          <CheckCircle className="w-5 h-5 text-green-400" />
-                          <span className="text-white">CBT Anxiety Module</span>
-                        </div>
-                        <div className="flex items-center space-x-3 p-3 bg-gray-700 rounded-lg">
-                          <Clock className="w-5 h-5 text-yellow-400" />
-                          <span className="text-white">
-                            Mindfulness Exercises
-                          </span>
-                        </div>
-                        <div className="flex items-center space-x-3 p-3 bg-gray-700 rounded-lg">
-                          <Plus className="w-5 h-5 text-gray-400" />
-                          <span className="text-gray-400">
-                            Add new intervention
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {activeTab === "notes" && (
-                  <div className="max-w-4xl">
-                    {/* Add Note */}
-                    <div className="bg-gray-800 rounded-xl p-6 border border-gray-700 mb-6">
-                      <h3 className="text-lg font-semibold text-white mb-4">
-                        Add Session Note
-                      </h3>
-                      <div className="space-y-3">
-                        <textarea
-                          value={newNote}
-                          onChange={(e) => setNewNote(e.target.value)}
-                          placeholder="Enter your session notes here..."
-                          className="w-full bg-gray-700 text-white p-3 rounded-lg h-24 resize-none focus:outline-none focus:ring-2 focus:ring-purple-500"
-                        />
-                        <div className="flex justify-end">
-                          <button
-                            onClick={handleAddNote}
-                            className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors flex items-center"
-                          >
-                            <Send className="w-4 h-4 mr-2" />
-                            Save Note
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Notes History */}
-                    <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                      <h3 className="text-lg font-semibold text-white mb-4">
-                        Session History
-                      </h3>
-                      <div className="space-y-4">
-                        {selectedStudent.notes.map((note, index) => (
-                          <div
-                            key={index}
-                            className="p-4 bg-gray-700 rounded-lg border-l-4 border-purple-400"
-                          >
-                            <div className="flex items-center justify-between mb-2">
-                              <div className="flex items-center space-x-2">
-                                <span
-                                  className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                    note.type === "session"
-                                      ? "bg-blue-600 bg-opacity-20 text-blue-400"
-                                      : note.type === "assessment"
-                                      ? "bg-green-600 bg-opacity-20 text-green-400"
-                                      : "bg-gray-600 bg-opacity-20 text-gray-400"
-                                  }`}
-                                >
-                                  {note.type}
-                                </span>
-                                <span className="text-sm text-gray-400">
-                                  by {note.counselor}
-                                </span>
-                              </div>
-                              <span className="text-sm text-gray-400">
-                                {note.date}
-                              </span>
-                            </div>
-                            <p className="text-white">{note.content}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {activeTab === "engagement" && (
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Engagement Metrics */}
-                    <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                      <h3 className="text-lg font-semibold text-white mb-4">
-                        Engagement Metrics
-                      </h3>
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between p-3 bg-gray-700 rounded-lg">
-                          <div className="flex items-center space-x-3">
-                            <Video className="w-5 h-5 text-blue-400" />
-                            <span className="text-white">
-                              Sessions Attended
-                            </span>
-                          </div>
-                          <span className="text-blue-400 font-semibold">
-                            {selectedStudent.engagementMetrics.sessionsAttended}
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between p-3 bg-gray-700 rounded-lg">
-                          <div className="flex items-center space-x-3">
-                            <BookOpen className="w-5 h-5 text-green-400" />
-                            <span className="text-white">
-                              Modules Completed
-                            </span>
-                          </div>
-                          <span className="text-green-400 font-semibold">
-                            {selectedStudent.engagementMetrics.modulesCompleted}
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between p-3 bg-gray-700 rounded-lg">
-                          <div className="flex items-center space-x-3">
-                            <Zap className="w-5 h-5 text-orange-400" />
-                            <span className="text-white">Current Streak</span>
-                          </div>
-                          <span className="text-orange-400 font-semibold">
-                            {selectedStudent.engagementMetrics.streakDays} days
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between p-3 bg-gray-700 rounded-lg">
-                          <div className="flex items-center space-x-3">
-                            <Clock className="w-5 h-5 text-purple-400" />
-                            <span className="text-white">Last Login</span>
-                          </div>
-                          <span className="text-purple-400 font-semibold">
-                            {selectedStudent.engagementMetrics.lastLogin}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Resource Recommendations */}
-                    <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                      <h3 className="text-lg font-semibold text-white mb-4">
-                        Recommend Resources
-                      </h3>
-                      <div className="space-y-3">
-                        {[
-                          {
-                            title: "Anxiety Management CBT",
-                            type: "Module",
-                            duration: "20 min",
-                          },
-                          {
-                            title: "Deep Breathing VR Session",
-                            type: "VR Experience",
-                            duration: "15 min",
-                          },
-                          {
-                            title: "Sleep Hygiene Guide",
-                            type: "Article",
-                            duration: "5 min read",
-                          },
-                          {
-                            title: "Mindfulness Meditation",
-                            type: "Audio",
-                            duration: "10 min",
-                          },
-                        ].map((resource, index) => (
-                          <div
-                            key={index}
-                            className="flex items-center justify-between p-3 bg-gray-700 rounded-lg"
-                          >
-                            <div>
-                              <h4 className="text-white font-medium">
-                                {resource.title}
-                              </h4>
-                              <p className="text-sm text-gray-400">
-                                {resource.type} • {resource.duration}
-                              </p>
-                            </div>
-                            <button className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm transition-colors">
-                              Assign
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </>
-          ) : (
-            // No Student Selected - Analytics Overview
-            <div className="flex-1 p-6">
-              <div className="max-w-6xl mx-auto">
-                <h2 className="text-2xl font-bold text-white mb-6">
-                  Analytics & Insights
-                </h2>
-
-                {/* Aggregate Statistics */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                  <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-gray-400 text-sm">Total Students</p>
-                        <p className="text-3xl font-bold text-white">
-                          {aggregateData.totalStudents}
-                        </p>
-                      </div>
-                      <Users className="w-8 h-8 text-purple-400" />
-                    </div>
-                  </div>
-                  <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-gray-400 text-sm">
-                          Average Wellness
-                        </p>
-                        <p className="text-3xl font-bold text-green-400">
-                          {aggregateData.averageWellnessScore}
-                        </p>
-                      </div>
-                      <Heart className="w-8 h-8 text-green-400" />
-                    </div>
-                  </div>
-                  <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-gray-400 text-sm">
-                          Sessions This Week
-                        </p>
-                        <p className="text-3xl font-bold text-blue-400">
-                          {aggregateData.sessionsThisWeek}
-                        </p>
-                      </div>
-                      <Calendar className="w-8 h-8 text-blue-400" />
-                    </div>
-                  </div>
-                  <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-gray-400 text-sm">Active Today</p>
-                        <p className="text-3xl font-bold text-yellow-400">
-                          {aggregateData.activeToday}
-                        </p>
-                      </div>
-                      <Activity className="w-8 h-8 text-yellow-400" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Risk Distribution & Engagement Analytics */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                  {/* Risk Distribution */}
-                  <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                    <h3 className="text-lg font-semibold text-white mb-4">
-                      Risk Distribution
-                    </h3>
-                    <ResponsiveContainer width="100%" height={250}>
-                      <PieChart>
-                        <Pie
-                          data={[
-                            {
-                              name: "Low Risk",
-                              value: aggregateData.lowRisk,
-                              fill: "#10B981",
-                            },
-                            {
-                              name: "Moderate Risk",
-                              value: aggregateData.moderateRisk,
-                              fill: "#F59E0B",
-                            },
-                            {
-                              name: "High Risk",
-                              value: aggregateData.highRisk,
-                              fill: "#EF4444",
-                            },
-                          ]}
-                          cx="50%"
-                          cy="50%"
-                          innerRadius={60}
-                          outerRadius={100}
-                          paddingAngle={5}
-                          dataKey="value"
-                        >
-                          {[
-                            {
-                              name: "Low Risk",
-                              value: aggregateData.lowRisk,
-                              fill: "#10B981",
-                            },
-                            {
-                              name: "Moderate Risk",
-                              value: aggregateData.moderateRisk,
-                              fill: "#F59E0B",
-                            },
-                            {
-                              name: "High Risk",
-                              value: aggregateData.highRisk,
-                              fill: "#EF4444",
-                            },
-                          ].map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.fill} />
-                          ))}
-                        </Pie>
-                        <Tooltip
-                          contentStyle={{
-                            backgroundColor: "#1F2937",
-                            border: "1px solid #374151",
-                            borderRadius: "8px",
-                            color: "white",
-                          }}
-                        />
-                      </PieChart>
-                    </ResponsiveContainer>
-                  </div>
-
-                  {/* Engagement Overview */}
-                  <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                    <h3 className="text-lg font-semibold text-white mb-4">
-                      Platform Engagement
-                    </h3>
-                    <ResponsiveContainer width="100%" height={250}>
-                      <BarChart
-                        data={[
-                          {
-                            name: "Self-Help",
-                            value: aggregateData.engagement.selfHelpModules,
-                          },
-                          {
-                            name: "VR Sessions",
-                            value: aggregateData.engagement.vrSessions,
-                          },
-                          {
-                            name: "Counseling",
-                            value: aggregateData.engagement.counselingSessions,
-                          },
-                          {
-                            name: "Chat",
-                            value: aggregateData.engagement.chatInteractions,
-                          },
-                        ]}
-                      >
-                        <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-                        <XAxis dataKey="name" stroke="#9CA3AF" />
-                        <YAxis stroke="#9CA3AF" />
-                        <Tooltip
-                          contentStyle={{
-                            backgroundColor: "#1F2937",
-                            border: "1px solid #374151",
-                            borderRadius: "8px",
-                            color: "white",
-                          }}
-                        />
-                        <Bar dataKey="value" fill="#8B5CF6" />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
-
-                {/* Early Warning Signals */}
-                <div className="bg-gray-800 rounded-xl p-6 border border-gray-700 mb-8">
-                  <h3 className="text-lg font-semibold text-white mb-4">
-                    Early Warning Signals
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="p-4 bg-red-600 bg-opacity-20 rounded-lg border border-red-400 border-opacity-30">
-                      <div className="flex items-center space-x-3 mb-2">
-                        <AlertTriangle className="w-5 h-5 text-red-400" />
-                        <h4 className="font-semibold text-red-400">
-                          At-Risk Students
-                        </h4>
-                      </div>
-                      <p className="text-red-300 text-sm">
-                        5 students showing declining trends this week
-                      </p>
-                    </div>
-                    <div className="p-4 bg-yellow-600 bg-opacity-20 rounded-lg border border-yellow-400 border-opacity-30">
-                      <div className="flex items-center space-x-3 mb-2">
-                        <Clock className="w-5 h-5 text-yellow-400" />
-                        <h4 className="font-semibold text-yellow-400">
-                          Missed Sessions
-                        </h4>
-                      </div>
-                      <p className="text-yellow-300 text-sm">
-                        8 students have missed recent appointments
-                      </p>
-                    </div>
-                    <div className="p-4 bg-blue-600 bg-opacity-20 rounded-lg border border-blue-400 border-opacity-30">
-                      <div className="flex items-center space-x-3 mb-2">
-                        <Target className="w-5 h-5 text-blue-400" />
-                        <h4 className="font-semibold text-blue-400">
-                          Low Engagement
-                        </h4>
-                      </div>
-                      <p className="text-blue-300 text-sm">
-                        12 students haven't logged in for 3+ days
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Team Collaboration */}
+          <div className="p-6">
+            {/* Overview Tab */}
+            {selectedTab === 'overview' && (
+              <div className="space-y-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {/* Recent Team Activity */}
-                  <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                    <h3 className="text-lg font-semibold text-white mb-4">
-                      Team Activity
-                    </h3>
-                    <div className="space-y-3">
-                      {[
-                        {
-                          counselor: "Dr. Smith",
-                          action: "Completed session with STU-001",
-                          time: "2 hours ago",
-                        },
-                        {
-                          counselor: "Dr. Johnson",
-                          action: "Updated care plan for STU-002",
-                          time: "4 hours ago",
-                        },
-                        {
-                          counselor: "Dr. Wilson",
-                          action: "Escalated STU-004 to psychiatrist",
-                          time: "6 hours ago",
-                        },
-                        {
-                          counselor: "Dr. Brown",
-                          action: "Assigned new resources to STU-003",
-                          time: "1 day ago",
-                        },
-                      ].map((activity, index) => (
-                        <div
-                          key={index}
-                          className="flex items-start space-x-3 p-3 bg-gray-700 rounded-lg"
-                        >
-                          <User className="w-5 h-5 text-purple-400 mt-0.5" />
-                          <div className="flex-1">
-                            <p className="text-white text-sm">
-                              <span className="font-semibold">
-                                {activity.counselor}
-                              </span>{" "}
-                              {activity.action}
-                            </p>
-                            <p className="text-gray-400 text-xs mt-1">
-                              {activity.time}
-                            </p>
-                          </div>
+                  {/* Weekly Activity Chart */}
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-4">Weekly Activity</h3>
+                    <div className="flex items-end justify-between h-32 space-x-2">
+                      {weeklyStats.map((stat, index) => (
+                        <div key={index} className="flex flex-col items-center">
+                          <div
+                            className="bg-pink-500 rounded-t"
+                            style={{ height: `${(stat.sessions / 4) * 100}px`, width: '24px' }}
+                          ></div>
+                          <span className="text-xs text-gray-600 mt-2">{stat.day}</span>
+                          <span className="text-xs font-medium text-gray-800">{stat.sessions}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  {/* Privacy & Compliance */}
-                  <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                    <h3 className="text-lg font-semibold text-white mb-4">
-                      Privacy & Compliance
-                    </h3>
+                  {/* Counselor Profile */}
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-4">Profile Information</h3>
                     <div className="space-y-3">
-                      <div className="flex items-center justify-between p-3 bg-gray-700 rounded-lg">
-                        <div className="flex items-center space-x-3">
-                          <Lock className="w-5 h-5 text-green-400" />
-                          <span className="text-white">Data Encryption</span>
-                        </div>
-                        <CheckCircle className="w-5 h-5 text-green-400" />
+                      <div>
+                        <label className="text-sm text-gray-600">Degree & Batch</label>
+                        <p className="font-medium text-gray-900">{counselorData.degree} - {counselorData.batch}</p>
                       </div>
-                      <div className="flex items-center justify-between p-3 bg-gray-700 rounded-lg">
-                        <div className="flex items-center space-x-3">
-                          <Shield className="w-5 h-5 text-green-400" />
-                          <span className="text-white">Audit Trail</span>
+                      <div>
+                        <label className="text-sm text-gray-600">Location</label>
+                        <div className="flex items-center mt-1">
+                          <MapPin className="h-4 w-4 text-gray-600 mr-1" />
+                          <span className="font-medium text-gray-900">{counselorData.hostel}, {counselorData.room}</span>
                         </div>
-                        <CheckCircle className="w-5 h-5 text-green-400" />
                       </div>
-                      <div className="flex items-center justify-between p-3 bg-gray-700 rounded-lg">
-                        <div className="flex items-center space-x-3">
-                          <FileText className="w-5 h-5 text-blue-400" />
-                          <span className="text-white">Consent Tracking</span>
+                      <div>
+                        <label className="text-sm text-gray-600">Gender & Matching</label>
+                        <p className="font-medium text-gray-900">{counselorData.gender} - Same Gender Matching</p>
+                      </div>
+                      <div>
+                        <label className="text-sm text-gray-600">Student Rating</label>
+                        <div className="flex items-center">
+                          <span className="font-medium text-gray-900 mr-2">{counselorData.rating}</span>
+                          {[...Array(5)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className={`h-4 w-4 ${i < Math.floor(counselorData.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
+                            />
+                          ))}
                         </div>
-                        <span className="text-blue-400 text-sm">
-                          156/156 compliant
-                        </span>
                       </div>
-                      <button className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors flex items-center justify-center">
-                        <Download className="w-4 h-4 mr-2" />
-                        Export Compliance Report
-                      </button>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+
+            {/* Connection Requests Tab */}
+            {selectedTab === 'requests' && (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold text-gray-800">Student Connection Requests</h3>
+                  <span className="text-sm text-gray-600">Matched by location and gender</span>
+                </div>
+                {connectionRequests.map((request) => (
+                  <div key={request.id} className="border border-gray-200 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center space-x-3">
+                        <span className="font-medium text-gray-900">Student ID: {request.studentId}</span>
+                        <span className={`px-2 py-1 text-xs font-semibold rounded-full ${getUrgencyColor(request.urgency)}`}>
+                          {request.urgency} urgency
+                        </span>
+                      </div>
+                      <span className="text-sm text-gray-500">{request.requestTime}</span>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                      <div>
+                        <label className="text-xs text-gray-600">Location Match</label>
+                        <div className="flex items-center mt-1">
+                          <MapPin className="h-4 w-4 text-green-600 mr-2" />
+                          <span className="text-sm font-medium">{request.hostelBlock} - {request.roomArea}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <label className="text-xs text-gray-600">Gender Match</label>
+                        <div className="flex items-center mt-1">
+                          <UserCheck className="h-4 w-4 text-green-600 mr-2" />
+                          <span className="text-sm font-medium">{request.gender} ✓</span>
+                        </div>
+                      </div>
+                      <div>
+                        <label className="text-xs text-gray-600">Preferred Mode</label>
+                        <div className="flex items-center mt-1">
+                          {request.preferredMode === 'in-person' ? (
+                            <Users className="h-4 w-4 text-blue-600 mr-2" />
+                          ) : (
+                            <Video className="h-4 w-4 text-purple-600 mr-2" />
+                          )}
+                          <span className="text-sm font-medium capitalize">{request.preferredMode}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="text-xs text-gray-600">Reason for Connection</label>
+                      <p className="text-sm text-gray-800 mt-1">{request.reason}</p>
+                    </div>
+
+                    <div className="flex space-x-3">
+                      <button
+                        onClick={() => handleConnectionRequest(request.id, 'accept')}
+                        className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                      >
+                        <CheckCircle className="h-4 w-4 mr-2" />
+                        Accept & Connect
+                      </button>
+                      <button
+                        onClick={() => handleConnectionRequest(request.id, 'decline')}
+                        className="flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
+                      >
+                        <XCircle className="h-4 w-4 mr-2" />
+                        Decline
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Active Sessions Tab */}
+            {selectedTab === 'active' && (
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-gray-800">Ongoing Counseling Sessions</h3>
+                {activeSessions.map((session) => (
+                  <div key={session.id} className="border border-gray-200 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center space-x-3">
+                        <span className="font-medium text-gray-900">Student ID: {session.studentId}</span>
+                        <span className="text-sm text-gray-600">({session.sessionCount} sessions)</span>
+                      </div>
+                      <span className="text-sm text-gray-600">Started: {session.startDate}</span>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                      <div>
+                        <label className="text-xs text-gray-600">Next Session</label>
+                        <div className="flex items-center mt-1">
+                          <Calendar className="h-4 w-4 text-blue-600 mr-2" />
+                          <span className="text-sm font-medium">{session.nextSession}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <label className="text-xs text-gray-600">Mode & Location</label>
+                        <div className="flex items-center mt-1">
+                          {session.mode === 'in-person' ? (
+                            <Users className="h-4 w-4 text-green-600 mr-2" />
+                          ) : (
+                            <Video className="h-4 w-4 text-purple-600 mr-2" />
+                          )}
+                          <span className="text-sm font-medium">{session.location}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <label className="text-xs text-gray-600">Progress</label>
+                        <p className={`text-sm font-medium mt-1 ${getProgressColor(session.progress)}`}>
+                          {session.progress}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="text-xs text-gray-600">Session Notes</label>
+                      <p className="text-sm text-gray-800 mt-1">{session.notes}</p>
+                    </div>
+
+                    <div className="flex space-x-3">
+                      <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        Contact Student
+                      </button>
+                      <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                        Schedule Session
+                      </button>
+                      <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
+                        Add Notes
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Recent Sessions Tab */}
+            {selectedTab === 'history' && (
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-gray-800">Recently Completed Sessions</h3>
+                {recentSessions.map((session) => (
+                  <div key={session.id} className="border border-gray-200 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center space-x-3">
+                        <span className="font-medium text-gray-900">Anonymous Student</span>
+                        <span className="text-sm text-gray-600">{session.studentId}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-sm text-gray-600">{session.date}</span>
+                        <span className="text-sm text-gray-500">({session.duration})</span>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
+                      <div>
+                        <label className="text-xs text-gray-600">Session Mode</label>
+                        <div className="flex items-center mt-1">
+                          {session.mode === 'in-person' ? (
+                            <Users className="h-4 w-4 text-green-600 mr-2" />
+                          ) : (
+                            <Video className="h-4 w-4 text-purple-600 mr-2" />
+                          )}
+                          <span className="text-sm capitalize">{session.mode}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <label className="text-xs text-gray-600">Outcome</label>
+                        <p className="text-sm font-medium mt-1">{session.outcome}</p>
+                      </div>
+                      <div>
+                        <label className="text-xs text-gray-600">Student Rating</label>
+                        <div className="flex items-center mt-1">
+                          {[...Array(5)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className={`h-4 w-4 ${i < session.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-xs text-gray-600">Student Feedback</label>
+                      <p className="text-sm text-gray-800 mt-1 italic">"{session.feedback}"</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">Quick Actions</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <button className="flex items-center justify-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-colors">
+              <Clock className="h-6 w-6 text-gray-600 mr-2" />
+              <span className="text-gray-700">Update Availability</span>
+            </button>
+            <button className="flex items-center justify-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-colors">
+              <MessageCircle className="h-6 w-6 text-gray-600 mr-2" />
+              <span className="text-gray-700">Send Message</span>
+            </button>
+            <button className="flex items-center justify-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-colors">
+              <Calendar className="h-6 w-6 text-gray-600 mr-2" />
+              <span className="text-gray-700">View Calendar</span>
+            </button>
+            <button className="flex items-center justify-center p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-colors">
+              <TrendingUp className="h-6 w-6 text-gray-600 mr-2" />
+              <span className="text-gray-700">View Reports</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default CounselorDashboard;
+export default CnlDashboard;
