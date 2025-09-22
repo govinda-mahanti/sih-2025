@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ const LoginPage = () => {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const validateForm = () => {
     const newErrors = {};
@@ -38,10 +40,19 @@ const LoginPage = () => {
     if (!validateForm()) return;
     setIsLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      console.log("Login successful:", formData);
-      alert("Login successful!");
-      setFormData({ email: "", password: "" });
+      // Mock API
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
+      // 🎯 Example: Decide role based on email
+      let role = "student";
+      if (formData.email.includes("college")) role = "college";
+      else if (formData.email.includes("counsellor")) role = "counsellor";
+      else if (formData.email.includes("psychiatrist")) role = "psychiatrist";
+
+      console.log("Login successful:", formData, "Role:", role);
+
+      // ✅ Redirect based on role
+      navigate(`/${role}/dashboard`);
     } catch (err) {
       console.error(err);
       alert("Login failed.");
@@ -53,10 +64,8 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
       <div className="w-full max-w-md bg-white shadow-xl rounded-2xl p-6 space-y-6">
-        {/* Header */}
         <h2 className="text-2xl font-bold text-center text-gray-800">Login</h2>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Email */}
           <div>

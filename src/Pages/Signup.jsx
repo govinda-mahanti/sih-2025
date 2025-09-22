@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Eye,
   EyeOff,
-  User,
   Mail,
   Lock,
   Users,
@@ -15,13 +14,12 @@ import heroimg from "../assets/heroimg.png";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
-    username: "",
     email: "",
     password: "",
     confirmPassword: "",
     role: "",
   });
-  const navigate = useNavigate(); // <-- initialize here
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -32,57 +30,58 @@ const SignupPage = () => {
     {
       value: "student",
       label: "Student",
-
       icon: GraduationCap,
       color: "text-blue-600",
+      link: "/student/dashboard",
     },
     {
       value: "college",
       label: "College",
       icon: Building,
       color: "text-pink-600",
+      link: "/college/dashboard",
     },
     {
       value: "counsellor",
       label: "Counsellor",
-
       icon: Users,
       color: "text-green-600",
+      link: "/counsellor/dashboard",
     },
     {
       value: "psychiatrist",
       label: "Psychiatrist",
-
       icon: Stethoscope,
       color: "text-purple-600",
+      link: "/psychiatrist/dashboard",
     },
   ];
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.username.trim()) {
-      newErrors.username = "Username is required";
-    } else if (formData.username.length < 3) {
-      newErrors.username = "Username must be at least 3 characters";
-    }
+
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Enter a valid email address";
     }
+
     if (!formData.password) {
       newErrors.password = "Password is required";
     } else if (formData.password.length < 8) {
       newErrors.password = "Password must be at least 8 characters";
     }
+
     if (!formData.confirmPassword) {
       newErrors.confirmPassword = "Please confirm password";
     } else if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match";
     }
+
     if (!formData.role) {
       newErrors.role = "Please select a role";
     }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -106,8 +105,13 @@ const SignupPage = () => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       console.log("Form submitted:", formData);
       alert("Registration successful!");
+
+      const selectedRole = roles.find((r) => r.value === formData.role);
+      if (selectedRole) {
+        navigate(selectedRole.link); // role-based dashboard
+      }
+
       setFormData({
-        username: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -124,33 +128,8 @@ const SignupPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
       <div className="w-full max-w-md bg-white shadow-xl rounded-2xl p-6 space-y-6">
-        {/* Header */}
-
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Username */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
-              Username *
-            </label>
-            <div className="relative">
-              <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-              <input
-                type="text"
-                name="username"
-                value={formData.username}
-                onChange={handleInputChange}
-                className={`w-full pl-10 pr-3 py-2 border-2 rounded-xl focus:ring-2 focus:ring-blue-500 ${
-                  errors.username ? "border-red-300" : "border-gray-200"
-                }`}
-                placeholder="Enter username"
-              />
-            </div>
-            {errors.username && (
-              <p className="text-sm text-red-600">{errors.username}</p>
-            )}
-          </div>
-
           {/* Email */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1">
@@ -239,6 +218,7 @@ const SignupPage = () => {
               <p className="text-sm text-red-600">{errors.confirmPassword}</p>
             )}
           </div>
+
           {/* Role Selection */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -285,7 +265,7 @@ const SignupPage = () => {
           </button>
         </form>
         <div className="p-4 text-center">
-          <span className="">Already have an account?</span>
+          <span>Already have an account?</span>
           <button
             onClick={() => navigate("/login")}
             className="font-bold ml-2 hover:underline focus:outline-none"
@@ -295,7 +275,7 @@ const SignupPage = () => {
         </div>
       </div>
       <div className="p-4">
-        <img src={heroimg} alt="" />
+        <img src={heroimg} alt="hero" />
       </div>
     </div>
   );

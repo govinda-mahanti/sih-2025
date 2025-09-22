@@ -178,7 +178,6 @@ const HomePage = () => {
       {/* Additional Sections */}
       {/* ////////////////////////////////////////////////////////////////////////////////// */}
 
-
       <section id="services">
         <style jsx>{`
           .perspective-1000 {
@@ -450,7 +449,10 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="bg-gray-50 text-gray-900 py-20 px-6 md:px-24">
+      <section
+        className="bg-gray-50 text-gray-900 py-20 px-6 md:px-24"
+        id="faq"
+      >
         <div className="max-w-4xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
@@ -504,7 +506,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
 
       <section id="footer"></section>
     </div>
