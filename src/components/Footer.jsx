@@ -1,6 +1,6 @@
 import React from 'react';
 import { Mail, Phone, MapPin, Clock, Facebook, Twitter, Instagram, Linkedin, Heart } from 'lucide-react';
-
+import logo from '../assets/logo.png';
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900 text-white">
@@ -11,10 +11,11 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                <div className="w-4 h-4 bg-white rounded-full"></div>
-              </div>
-              <h3 className="text-xl font-bold">Neurocare</h3>
+           
+              {/* <h3 className="text-xl font-bold">Neurocare</h3> */}
+               <div className="w-40 h-8 rounded-lg flex items-center justify-center">
+                                <img src={logo} alt="logo" className="w-80 mr-[5px]" />
+                              </div>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">
               Advanced neurological care and treatment solutions. We're committed to improving lives through cutting-edge neuroscience and compassionate patient care.

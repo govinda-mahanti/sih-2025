@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import logo from "../assets/logo.png";
+import logo1 from "../assets/logo1.png";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -98,12 +98,12 @@ const Navbar = () => {
                 onClick={() => handleNavClick("home")}
                 className="flex items-center"
               >
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center">
-                  <img src={logo} alt="logo" className="w-8 mr-[5px]" />
+                <div className="w-40 h-8 rounded-lg flex items-center justify-center">
+                  <img src={logo1} alt="logo" className="w-80 mr-[5px]" />
                 </div>
-                <span className="ml-2 text-xl font-bold text-gray-800">
+                {/* <span className="ml-2 text-xl font-bold text-gray-800">
                   Neurocare
-                </span>
+                </span> */}
               </button>
             </div>
 

@@ -20,30 +20,30 @@ const StdLayout = () => {
   const menuItems = [
     {
       name: "Dashboard",
-      path: "/dashboard",
+      path: "/student/dashboard",
       icon: <Home className="h-5 w-5" />,
     },
     {
       name: "Profile",
-      path: "/profile",
+      path: "/student/profile",
       icon: <Users className="h-5 w-5" />,
     },
-    {
-      name: "Appointment",
-      path: "/appointment",
-      icon: <Calendar className="h-5 w-5" />,
-    },
-    {
-      name: "Sessions",
-      path: "/sessions",
-      icon: <FileText className="h-5 w-5" />,
-    },
+    // {
+    //   name: "Appointment",
+    //   path: "/appointment",
+    //   icon: <Calendar className="h-5 w-5" />,
+    // },
+    // {
+    //   name: "Sessions",
+    //   path: "/sessions",
+    //   icon: <FileText className="h-5 w-5" />,
+    // },
 
-    {
-      name: "",
-      path: "/",
-      icon: <Pill className="h-5 w-5" />,
-    },
+    // {
+    //   name: "",
+    //   path: "/",
+    //   icon: <Pill className="h-5 w-5" />,
+    // },
   ];
 
   return (
@@ -74,7 +74,7 @@ const StdLayout = () => {
       <div className="flex-1 flex flex-col">
         <div className="flex items-center justify-end p-4 bg-blue-600 shadow">
           {/* Icons */}
-          <div className="flex items-center space-x-4 text-gray-700">
+          <div className="flex items-center space-x-4 text-white">
             <Home
               className="h-5 w-5 cursor-pointer"
               onClick={() => navigate("/")}
