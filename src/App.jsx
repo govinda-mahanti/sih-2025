@@ -6,22 +6,20 @@ import Signup from "./Pages/Signup";
 import Layout from "./components/Layout";
 import AboutUs from "./Pages/AboutUs";
 
-
 import CollegeDashboard from "./College/ClgDashboard";
 import ClgLayout from "./College/ClgLayout";
-
+import ClgStudent from "./College/ClgStudent";
+import ClgSessions from "./College/ClgSessions";
+import ClgCounselors from "./College/ClgCounselors";
 
 import CnlLayout from "./Counsellor/CnlLayout";
 import CnlDashboard from "./Counsellor/CnlDashboard";
 
-
 import PsyLayout from "./Psychiatrist/PsyLayout";
 import PsyDashboard from "./Psychiatrist/PsyDashboard";
 
-
 import StdLayout from "./Students/StdLayout";
 import StdDashboard from "./Students/StdDashboard";
-
 
 const App = () => {
   return (
@@ -34,23 +32,24 @@ const App = () => {
           <Route path="/aboutus" element={<AboutUs />} />
         </Route>
 
-       <Route path="/college" element={<ClgLayout />}>
-  <Route path="dashboard" element={<CollegeDashboard />} />
-</Route>
+        <Route path="/college" element={<ClgLayout />}>
+          <Route path="/dashboard" element={<CollegeDashboard />} />
+          <Route path="/students" element={<ClgStudent />} />
+          <Route path="/sessions" element={<ClgSessions />} />
+          <Route path="/counselors" element={<ClgCounselors />} />
+        </Route>
 
-<Route path="/counsellor" element={<CnlLayout />}>
-  <Route path="dashboard" element={<CnlDashboard />} />
-</Route>
+        <Route path="/counsellor" element={<CnlLayout />}>
+          <Route path="dashboard" element={<CnlDashboard />} />
+        </Route>
 
-<Route path="/psychiatrist" element={<PsyLayout />}>
-  <Route path="dashboard" element={<PsyDashboard />} />
-</Route>
+        <Route path="/psychiatrist" element={<PsyLayout />}>
+          <Route path="dashboard" element={<PsyDashboard />} />
+        </Route>
 
-<Route path="/student" element={<StdLayout />}>
-  <Route path="dashboard" element={<StdDashboard />} />
-</Route>
-
-
+        <Route path="/student" element={<StdLayout />}>
+          <Route path="dashboard" element={<StdDashboard />} />
+        </Route>
       </Routes>
     </Router>
   );

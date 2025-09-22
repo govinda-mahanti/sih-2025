@@ -20,34 +20,34 @@ const ClgLayout = () => {
   const menuItems = [
     { 
       name: "Dashboard", 
-      path: "/dashboard", 
+      path: "/college/dashboard", 
       icon: <Home className="h-5 w-5" /> 
     },
     { 
-      name: "Patient", 
-      path: "/patient", 
+      name: "Students", 
+      path: "/college/students", 
       icon: <Users className="h-5 w-5" /> 
     },
     {
-      name: "Appointment",
-      path: "/appointment",
+      name: "Counselors",
+      path: "/college/counselors",
       icon: <Calendar className="h-5 w-5" />,
     },
     {
-      name: "Prescription",
-      path: "/prescription",
+      name: "Sessions",
+      path: "/college/sessions",
       icon: <FileText className="h-5 w-5" />,
     },
-    {
-      name: "Invoicing",
-      path: "/invoicing",
-      icon: <CreditCard className="h-5 w-5" />,
-    },
-    { 
-      name: "Drugs", 
-      path: "/drugs", 
-      icon: <Pill className="h-5 w-5" /> 
-    },
+    // {
+    //   name: "Invoicing",
+    //   path: "/college/invoicing",
+    //   icon: <CreditCard className="h-5 w-5" />,
+    // },
+    // { 
+    //   name: "Drugs", 
+    //   path: "/drugs", 
+    //   icon: <Pill className="h-5 w-5" /> 
+    // },
   ];
 
   return (
@@ -80,7 +80,7 @@ const ClgLayout = () => {
       <div className="flex-1 flex flex-col">
         <div className="flex items-center justify-end p-4 bg-blue-600 shadow">
           {/* Icons */}
-          <div className="flex items-center space-x-4 text-gray-700">
+          <div className="flex items-center space-x-4 text-white">
             <Home
               className="h-5 w-5 cursor-pointer"
               onClick={() => navigate("/")}
