@@ -18,15 +18,15 @@ const StdLayout = () => {
   const navigate = useNavigate();
 
   const menuItems = [
-    { 
-      name: "Dashboard", 
-      path: "/dashboard", 
-      icon: <Home className="h-5 w-5" /> 
+    {
+      name: "Dashboard",
+      path: "/dashboard",
+      icon: <Home className="h-5 w-5" />,
     },
-    { 
-      name: "Patient", 
-      path: "/patient", 
-      icon: <Users className="h-5 w-5" /> 
+    {
+      name: "Profile",
+      path: "/profile",
+      icon: <Users className="h-5 w-5" />,
     },
     {
       name: "Appointment",
@@ -34,19 +34,15 @@ const StdLayout = () => {
       icon: <Calendar className="h-5 w-5" />,
     },
     {
-      name: "Prescription",
-      path: "/prescription",
+      name: "Sessions",
+      path: "/sessions",
       icon: <FileText className="h-5 w-5" />,
     },
+
     {
-      name: "Invoicing",
-      path: "/invoicing",
-      icon: <CreditCard className="h-5 w-5" />,
-    },
-    { 
-      name: "Drugs", 
-      path: "/drugs", 
-      icon: <Pill className="h-5 w-5" /> 
+      name: "",
+      path: "/",
+      icon: <Pill className="h-5 w-5" />,
     },
   ];
 
@@ -73,8 +69,6 @@ const StdLayout = () => {
             </Link>
           ))}
         </nav>
-
-      
       </div>
 
       <div className="flex-1 flex flex-col">
