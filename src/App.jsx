@@ -33,10 +33,10 @@ const App = () => {
         </Route>
 
         <Route path="/college" element={<ClgLayout />}>
-          <Route path="/dashboard" element={<CollegeDashboard />} />
-          <Route path="/students" element={<ClgStudent />} />
-          <Route path="/sessions" element={<ClgSessions />} />
-          <Route path="/counselors" element={<ClgCounselors />} />
+          <Route path="dashboard" element={<CollegeDashboard />} />
+          <Route path="students" element={<ClgStudent />} />
+          <Route path="sessions" element={<ClgSessions />} />
+          <Route path="counselors" element={<ClgCounselors />} />
         </Route>
 
         <Route path="/counsellor" element={<CnlLayout />}>

@@ -23,28 +23,28 @@ const PsyLayout = () => {
       path: "/dashboard", 
       icon: <Home className="h-5 w-5" /> 
     },
-    { 
-      name: "Patient", 
-      path: "/patient", 
-      icon: <Users className="h-5 w-5" /> 
-    },
+    // { 
+    //   name: "Patient", 
+    //   path: "/patient", 
+    //   icon: <Users className="h-5 w-5" /> 
+    // },
     {
       name: "Appointment",
       path: "/appointment",
       icon: <Calendar className="h-5 w-5" />,
     },
-    {
-      name: "Prescription",
-      path: "/prescription",
-      icon: <FileText className="h-5 w-5" />,
-    },
-    {
-      name: "Invoicing",
-      path: "/invoicing",
-      icon: <CreditCard className="h-5 w-5" />,
-    },
+    // {
+    //   name: "Prescription",
+    //   path: "/prescription",
+    //   icon: <FileText className="h-5 w-5" />,
+    // },
+    // {
+    //   name: "Invoicing",
+    //   path: "/invoicing",
+    //   icon: <CreditCard className="h-5 w-5" />,
+    // },
     { 
-      name: "Drugs", 
+      name: "Calender", 
       path: "/drugs", 
       icon: <Pill className="h-5 w-5" /> 
     },
