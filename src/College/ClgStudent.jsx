@@ -1,137 +1,148 @@
-import React, { useState } from 'react';
-import { Search, Filter, Users, Calendar, Heart, GraduationCap } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  Search,
+  Filter,
+  Users,
+  Calendar,
+  Heart,
+  GraduationCap,
+} from "lucide-react";
 
 const ClgStudent = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterStatus, setFilterStatus] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterStatus, setFilterStatus] = useState("all");
 
   // Sample student data
   const studentsData = [
     {
-      id: 'STU-2024-001',
-      degree: 'Computer Science',
-      batch: '2024',
-      lastSession: 'AI Video Consultation',
-      sessionDate: 'Sept 21, 2025',
-      mentalHealth: 'Good'
+      id: "STU-2024-001",
+      degree: "Computer Science",
+      batch: "2024",
+      lastSession: "AI Video Consultation",
+      sessionDate: "Sept 21, 2025",
+      mentalHealth: "Low",
     },
     {
-      id: 'STU-2024-042',
-      degree: 'Mechanical Engineering',
-      batch: '2023',
-      lastSession: 'VR Environment Session',
-      sessionDate: 'Sept 20, 2025',
-      mentalHealth: 'Excellent'
+      id: "STU-2024-042",
+      degree: "Mechanical Engineering",
+      batch: "2023",
+      lastSession: "VR Environment Session",
+      sessionDate: "Sept 20, 2025",
+      mentalHealth: "Excellent",
     },
     {
-      id: 'STU-2024-089',
-      degree: 'Psychology',
-      batch: '2024',
-      lastSession: 'Volunteer Counseling',
-      sessionDate: 'Sept 19, 2025',
-      mentalHealth: 'Fair'
+      id: "STU-2024-089",
+      degree: "Psychology",
+      batch: "2024",
+      lastSession: "Volunteer Counseling",
+      sessionDate: "Sept 19, 2025",
+      mentalHealth: "Moderate",
     },
     {
-      id: 'STU-2024-156',
-      degree: 'Business Administration',
-      batch: '2022',
-      lastSession: 'Anonymous Doctor Call',
-      sessionDate: 'Sept 22, 2025',
-      mentalHealth: 'Poor'
+      id: "STU-2024-156",
+      degree: "Business Administration",
+      batch: "2022",
+      lastSession: "Anonymous Doctor Call",
+      sessionDate: "Sept 22, 2025",
+      mentalHealth: "High",
     },
     {
-      id: 'STU-2024-234',
-      degree: 'Electrical Engineering',
-      batch: '2024',
-      lastSession: 'AI Character Call',
-      sessionDate: 'Sept 18, 2025',
-      mentalHealth: 'Good'
+      id: "STU-2024-234",
+      degree: "Electrical Engineering",
+      batch: "2024",
+      lastSession: "AI Character Call",
+      sessionDate: "Sept 18, 2025",
+      mentalHealth: "Low",
     },
     {
-      id: 'STU-2024-298',
-      degree: 'Civil Engineering',
-      batch: '2023',
-      lastSession: 'VR + Mind Sensor Session',
-      sessionDate: 'Sept 21, 2025',
-      mentalHealth: 'Excellent'
+      id: "STU-2024-298",
+      degree: "Civil Engineering",
+      batch: "2023",
+      lastSession: "VR + Mind Sensor Session",
+      sessionDate: "Sept 21, 2025",
+      mentalHealth: "Excellent",
     },
     {
-      id: 'STU-2024-312',
-      degree: 'Information Technology',
-      batch: '2024',
-      lastSession: 'College Yoga Session',
-      sessionDate: 'Sept 20, 2025',
-      mentalHealth: 'Good'
+      id: "STU-2024-312",
+      degree: "Information Technology",
+      batch: "2024",
+      lastSession: "College Yoga Session",
+      sessionDate: "Sept 20, 2025",
+      mentalHealth: "Low",
     },
     {
-      id: 'STU-2024-387',
-      degree: 'Data Science',
-      batch: '2022',
-      lastSession: 'Anonymous Volunteer Connect',
-      sessionDate: 'Sept 17, 2025',
-      mentalHealth: 'Fair'
+      id: "STU-2024-387",
+      degree: "Data Science",
+      batch: "2022",
+      lastSession: "Anonymous Volunteer Connect",
+      sessionDate: "Sept 17, 2025",
+      mentalHealth: "Moderate",
     },
     {
-      id: 'STU-2024-445',
-      degree: 'Chemical Engineering',
-      batch: '2023',
-      lastSession: 'AI Video Consultation',
-      sessionDate: 'Sept 19, 2025',
-      mentalHealth: 'Excellent'
+      id: "STU-2024-445",
+      degree: "Chemical Engineering",
+      batch: "2023",
+      lastSession: "AI Video Consultation",
+      sessionDate: "Sept 19, 2025",
+      mentalHealth: "Excellent",
     },
     {
-      id: 'STU-2024-521',
-      degree: 'Biotechnology',
-      batch: '2024',
-      lastSession: 'VR Environment Session',
-      sessionDate: 'Sept 16, 2025',
-      mentalHealth: 'Poor'
+      id: "STU-2024-521",
+      degree: "Biotechnology",
+      batch: "2024",
+      lastSession: "VR Environment Session",
+      sessionDate: "Sept 16, 2025",
+      mentalHealth: "High",
     },
     {
-      id: 'STU-2024-634',
-      degree: 'Mathematics',
-      batch: '2022',
-      lastSession: 'Volunteer Counseling',
-      sessionDate: 'Sept 21, 2025',
-      mentalHealth: 'Good'
+      id: "STU-2024-634",
+      degree: "Mathematics",
+      batch: "2022",
+      lastSession: "Volunteer Counseling",
+      sessionDate: "Sept 21, 2025",
+      mentalHealth: "Low",
     },
     {
-      id: 'STU-2024-789',
-      degree: 'Physics',
-      batch: '2023',
-      lastSession: 'AI Character Call',
-      sessionDate: 'Sept 15, 2025',
-      mentalHealth: 'Fair'
-    }
+      id: "STU-2024-789",
+      degree: "Physics",
+      batch: "2023",
+      lastSession: "AI Character Call",
+      sessionDate: "Sept 15, 2025",
+      mentalHealth: "Moderate",
+    },
   ];
 
   // Filter students based on search and status
-  const filteredStudents = studentsData.filter(student => {
-    const matchesSearch = student.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         student.degree.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         student.batch.includes(searchTerm);
-    const matchesFilter = filterStatus === 'all' || student.mentalHealth.toLowerCase() === filterStatus.toLowerCase();
+  const filteredStudents = studentsData.filter((student) => {
+    const matchesSearch =
+      student.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.degree.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.batch.includes(searchTerm);
+    const matchesFilter =
+      filterStatus === "all" ||
+      student.mentalHealth.toLowerCase() === filterStatus.toLowerCase();
     return matchesSearch && matchesFilter;
   });
 
   // Get mental health status styling
   const getHealthStatus = (status) => {
     const statusStyles = {
-      'Excellent': 'bg-green-100 text-green-800',
-      'Good': 'bg-blue-100 text-blue-800',
-      'Fair': 'bg-yellow-100 text-yellow-800',
-      'Poor': 'bg-red-100 text-red-800'
+      Excellent: "bg-green-100 text-green-800",
+      low: "bg-blue-100 text-blue-800",
+      moderate: "bg-yellow-100 text-yellow-800",
+      High: "bg-red-100 text-red-800",
     };
-    return statusStyles[status] || 'bg-gray-100 text-gray-800';
+    return statusStyles[status] || "bg-gray-100 text-gray-800";
   };
 
   // Get statistics
   const stats = {
     total: studentsData.length,
-    excellent: studentsData.filter(s => s.mentalHealth === 'Excellent').length,
-    good: studentsData.filter(s => s.mentalHealth === 'Good').length,
-    fair: studentsData.filter(s => s.mentalHealth === 'Fair').length,
-    poor: studentsData.filter(s => s.mentalHealth === 'Poor').length
+    excellent: studentsData.filter((s) => s.mentalHealth === "Excellent")
+      .length,
+    Low: studentsData.filter((s) => s.mentalHealth === "Low").length,
+    Moderate: studentsData.filter((s) => s.mentalHealth === "Moderate").length,
+    High: studentsData.filter((s) => s.mentalHealth === "High").length,
   };
 
   return (
@@ -139,8 +150,12 @@ const ClgStudent = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">Student Management</h1>
-          <p className="text-gray-600">Monitor and track all students' mental health progress</p>
+          <h1 className="text-4xl font-bold text-gray-800 mb-2">
+            Student Management
+          </h1>
+          <p className="text-gray-600">
+            Monitor and track all students' mental health progress
+          </p>
         </div>
 
         {/* Stats Cards */}
@@ -148,8 +163,12 @@ const ClgStudent = () => {
           <div className="bg-white rounded-lg shadow-md p-4 border-l-4 border-gray-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Total Students</p>
-                <p className="text-2xl font-bold text-gray-800">{stats.total}</p>
+                <p className="text-sm font-medium text-gray-600">
+                  Total Students
+                </p>
+                <p className="text-2xl font-bold text-gray-800">
+                  {stats.total}
+                </p>
               </div>
               <Users className="h-8 w-8 text-gray-500" />
             </div>
@@ -158,7 +177,9 @@ const ClgStudent = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Excellent</p>
-                <p className="text-2xl font-bold text-green-600">{stats.excellent}</p>
+                <p className="text-2xl font-bold text-green-600">
+                  {stats.excellent}
+                </p>
               </div>
               <Heart className="h-8 w-8 text-green-500" />
             </div>
@@ -166,8 +187,8 @@ const ClgStudent = () => {
           <div className="bg-white rounded-lg shadow-md p-4 border-l-4 border-blue-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Good</p>
-                <p className="text-2xl font-bold text-blue-600">{stats.good}</p>
+                <p className="text-sm font-medium text-gray-600">Low</p>
+                <p className="text-2xl font-bold text-blue-600">{stats.Low}</p>
               </div>
               <Heart className="h-8 w-8 text-blue-500" />
             </div>
@@ -175,8 +196,10 @@ const ClgStudent = () => {
           <div className="bg-white rounded-lg shadow-md p-4 border-l-4 border-yellow-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Fair</p>
-                <p className="text-2xl font-bold text-yellow-600">{stats.fair}</p>
+                <p className="text-sm font-medium text-gray-600">Moderate</p>
+                <p className="text-2xl font-bold text-yellow-600">
+                  {stats.Moderate}
+                </p>
               </div>
               <Heart className="h-8 w-8 text-yellow-500" />
             </div>
@@ -184,8 +207,8 @@ const ClgStudent = () => {
           <div className="bg-white rounded-lg shadow-md p-4 border-l-4 border-red-500">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Poor</p>
-                <p className="text-2xl font-bold text-red-600">{stats.poor}</p>
+                <p className="text-sm font-medium text-gray-600">High</p>
+                <p className="text-2xl font-bold text-red-600">{stats.High}</p>
               </div>
               <Heart className="h-8 w-8 text-red-500" />
             </div>
@@ -214,9 +237,9 @@ const ClgStudent = () => {
               >
                 <option value="all">All Status</option>
                 <option value="excellent">Excellent</option>
-                <option value="good">Good</option>
-                <option value="fair">Fair</option>
-                <option value="poor">Poor</option>
+                <option value="Low">Low</option>
+                <option value="Moderate">Moderate</option>
+                <option value="High">High</option>
               </select>
             </div>
           </div>
@@ -225,8 +248,13 @@ const ClgStudent = () => {
         {/* Students Table */}
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-xl font-semibold text-gray-800">Students List</h2>
-            <p className="text-sm text-gray-600 mt-1">Showing {filteredStudents.length} of {studentsData.length} students</p>
+            <h2 className="text-xl font-semibold text-gray-800">
+              Students List
+            </h2>
+            <p className="text-sm text-gray-600 mt-1">
+              Showing {filteredStudents.length} of {studentsData.length}{" "}
+              students
+            </p>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -258,11 +286,15 @@ const ClgStudent = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <GraduationCap className="h-5 w-5 text-gray-400 mr-2" />
-                        <span className="text-sm font-medium text-gray-900">{student.id}</span>
+                        <span className="text-sm font-medium text-gray-900">
+                          {student.id}
+                        </span>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-sm text-gray-600">{student.degree}</span>
+                      <span className="text-sm text-gray-600">
+                        {student.degree}
+                      </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">
@@ -270,7 +302,9 @@ const ClgStudent = () => {
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="text-sm text-gray-600">{student.lastSession}</span>
+                      <span className="text-sm text-gray-600">
+                        {student.lastSession}
+                      </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center text-sm text-gray-600">
@@ -279,7 +313,11 @@ const ClgStudent = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getHealthStatus(student.mentalHealth)}`}>
+                      <span
+                        className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getHealthStatus(
+                          student.mentalHealth
+                        )}`}
+                      >
                         {student.mentalHealth}
                       </span>
                     </td>
@@ -288,11 +326,13 @@ const ClgStudent = () => {
               </tbody>
             </table>
           </div>
-          
+
           {filteredStudents.length === 0 && (
             <div className="text-center py-12">
               <Users className="mx-auto h-12 w-12 text-gray-400" />
-              <h3 className="mt-2 text-sm font-medium text-gray-900">No students found</h3>
+              <h3 className="mt-2 text-sm font-medium text-gray-900">
+                No students found
+              </h3>
               <p className="mt-1 text-sm text-gray-500">
                 Try adjusting your search or filter criteria.
               </p>

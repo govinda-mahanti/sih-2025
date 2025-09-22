@@ -20,6 +20,8 @@ import PsyDashboard from "./Psychiatrist/PsyDashboard";
 
 import StdLayout from "./Students/StdLayout";
 import StdDashboard from "./Students/StdDashboard";
+import StdSessions from "./Students/StdSessions";
+import StdProfile from "./Students/StdProfile";
 
 const App = () => {
   return (
@@ -33,10 +35,10 @@ const App = () => {
         </Route>
 
         <Route path="/college" element={<ClgLayout />}>
-          <Route path="/dashboard" element={<CollegeDashboard />} />
-          <Route path="/students" element={<ClgStudent />} />
-          <Route path="/sessions" element={<ClgSessions />} />
-          <Route path="/counselors" element={<ClgCounselors />} />
+          <Route path="dashboard" element={<CollegeDashboard />} />
+          <Route path="students" element={<ClgStudent />} />
+          <Route path="sessions" element={<ClgSessions />} />
+          <Route path="counselors" element={<ClgCounselors />} />
         </Route>
 
         <Route path="/counsellor" element={<CnlLayout />}>
@@ -49,6 +51,8 @@ const App = () => {
 
         <Route path="/student" element={<StdLayout />}>
           <Route path="dashboard" element={<StdDashboard />} />
+          <Route path="profile" element={<StdProfile />} />
+          <Route path="sessions" element={<StdSessions />} />
         </Route>
       </Routes>
     </Router>

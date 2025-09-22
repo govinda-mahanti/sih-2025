@@ -16,7 +16,7 @@ import {
   Star,
 } from "lucide-react";
 
-const StudentDashboard = () => {
+const StdProfile = () => {
   const [selectedMood, setSelectedMood] = useState("");
 
   // Student data
@@ -164,7 +164,6 @@ const StudentDashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      {/* 
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
@@ -191,7 +190,7 @@ const StudentDashboard = () => {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
       <div className="max-w-7xl mx-auto p-6">
         {/* Quick Stats */}
@@ -476,4 +475,4 @@ const StudentDashboard = () => {
   );
 };
 
-export default StudentDashboard;
+export default StdProfile;
