@@ -45,7 +45,7 @@ const PsyLayout = () => {
     // },
     { 
       name: "Calender", 
-      path: "/drugs", 
+      path: "/psychiatrist/drugs", 
       icon: <Pill className="h-5 w-5" /> 
     },
   ];
