@@ -22,6 +22,7 @@ import StdLayout from "./Students/StdLayout";
 import StdDashboard from "./Students/StdDashboard";
 import StdSessions from "./Students/StdSessions";
 import StdProfile from "./Students/StdProfile";
+import CollegeRegistration from "./College/ClgRegister";
 
 const App = () => {
   return (
@@ -33,7 +34,7 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/aboutus" element={<AboutUs />} />
         </Route>
-
+        <Route path="/clgregister" element={<CollegeRegistration />} />
         <Route path="/college" element={<ClgLayout />}>
           <Route path="dashboard" element={<CollegeDashboard />} />
           <Route path="students" element={<ClgStudent />} />
