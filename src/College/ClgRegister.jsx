@@ -774,7 +774,7 @@ const CollegeRegistration = () => {
             </div>
           </div>
 
-          <div>
+          {/*  <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Principal ID Proof
             </label>
@@ -795,7 +795,7 @@ const CollegeRegistration = () => {
                 </p>
               </label>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
