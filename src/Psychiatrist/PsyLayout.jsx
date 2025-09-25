@@ -20,7 +20,7 @@ const PsyLayout = () => {
   const menuItems = [
     { 
       name: "Dashboard", 
-      path: "/dashboard", 
+      path: "/psychiatrist/dashboard", 
       icon: <Home className="h-5 w-5" /> 
     },
     // { 
@@ -30,7 +30,7 @@ const PsyLayout = () => {
     // },
     {
       name: "Appointment",
-      path: "/appointment",
+      path: "/psychiatrist/appointment",
       icon: <Calendar className="h-5 w-5" />,
     },
     // {
