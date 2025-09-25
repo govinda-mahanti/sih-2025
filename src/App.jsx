@@ -17,7 +17,7 @@ import CnlDashboard from "./Counsellor/CnlDashboard";
 
 import PsyLayout from "./Psychiatrist/PsyLayout";
 import PsyDashboard from "./Psychiatrist/PsyDashboard";
-
+import StdRegister from "./Students/StdRegister";
 import StdLayout from "./Students/StdLayout";
 import StdDashboard from "./Students/StdDashboard";
 import StdSessions from "./Students/StdSessions";
@@ -50,7 +50,7 @@ const App = () => {
           <Route path="dashboard" element={<PsyDashboard />} />
         </Route>
 
-        <Route path="/student" element={<StdLayout />}>
+        <Route path="/student" element={<StdRegister />}>
           <Route path="dashboard" element={<StdDashboard />} />
           <Route path="profile" element={<StdProfile />} />
           <Route path="sessions" element={<StdSessions />} />
