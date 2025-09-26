@@ -10,7 +10,7 @@ import {
   Building,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import heroimg from "../assets/heroimg.png";
+import heroimg from "../assets/heroImg.png";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
