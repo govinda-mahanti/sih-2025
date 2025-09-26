@@ -5,9 +5,10 @@ import { Rocket } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const FeatureCard = ({ name, image, shortInfo, details }) => {
   const [isFlipped, setIsFlipped] = useState(false);
-
+  const navigate = useNavigate();
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
@@ -285,7 +286,10 @@ const HomePage = () => {
                   </div>
                 </div>
 
-                <button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-10 py-4 rounded-xl hover:from-blue-700 hover:to-blue-800 transition duration-300 font-semibold text-lg shadow-lg">
+                <button
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-10 py-4 rounded-xl hover:from-blue-700 hover:to-blue-800 transition duration-300 font-semibold text-lg shadow-lg"
+                  onClick={() => navigate("/clgregister")}
+                >
                   Register Your Institution
                 </button>
               </div>

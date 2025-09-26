@@ -25,7 +25,6 @@ import StdProfile from "./Students/StdProfile";
 
 import CollegeRegistration from "./College/ClgRegister";
 
-
 import PsyAppointment from "./Psychiatrist/PsyAppointment";
 import PsyCalendar from "./Psychiatrist/PsyCalendar";
 const App = () => {
@@ -52,15 +51,14 @@ const App = () => {
 
         <Route path="/psychiatrist" element={<PsyLayout />}>
           <Route path="dashboard" element={<PsyDashboard />} />
-              <Route path="appointment" element={<PsyAppointment />} />
-               <Route path="calender" element={<PsyCalendar />} /> 
+          <Route path="appointment" element={<PsyAppointment />} />
+          <Route path="calender" element={<PsyCalendar />} />
         </Route>
-
-        <Route path="/student" element={<StdRegister />}>
+        <Route path="/stdregister" element={<StdRegister />} />
+        <Route path="/student" element={<StdLayout />}>
           <Route path="dashboard" element={<StdDashboard />} />
           <Route path="profile" element={<StdProfile />} />
           <Route path="sessions" element={<StdSessions />} />
-      
         </Route>
       </Routes>
     </Router>
