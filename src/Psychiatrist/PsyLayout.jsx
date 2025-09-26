@@ -2,12 +2,8 @@ import React from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   Home,
-  Users,
   Calendar,
-  FileText,
-  CreditCard,
   Pill,
-  Search,
   Settings,
   User,
 } from "lucide-react";
@@ -23,38 +19,24 @@ const PsyLayout = () => {
       path: "/psychiatrist/dashboard", 
       icon: <Home className="h-5 w-5" /> 
     },
-    // { 
-    //   name: "Patient", 
-    //   path: "/patient", 
-    //   icon: <Users className="h-5 w-5" /> 
-    // },
     {
       name: "Appointment",
       path: "/psychiatrist/appointment",
       icon: <Calendar className="h-5 w-5" />,
     },
-    // {
-    //   name: "Prescription",
-    //   path: "/prescription",
-    //   icon: <FileText className="h-5 w-5" />,
-    // },
-    // {
-    //   name: "Invoicing",
-    //   path: "/invoicing",
-    //   icon: <CreditCard className="h-5 w-5" />,
-    // },
     { 
       name: "Calender", 
-      path: "/drugs", 
+      path: "/psychiatrist/calender", 
       icon: <Pill className="h-5 w-5" /> 
     },
   ];
 
   return (
     <div className="flex h-screen">
+      {/* Sidebar */}
       <div className="w-64 bg-blue-600 text-white flex flex-col">
         <div className="p-4 flex items-center justify-center space-x-2 border-b border-gray-600">
-          <img src={Logo} alt="Implantoz Logo" className="h-14" />
+          <img src={Logo} alt="Sattava Logo" className="h-14" />
         </div>
 
         <nav className="flex-1 p-4 space-y-4">
@@ -73,14 +55,13 @@ const PsyLayout = () => {
             </Link>
           ))}
         </nav>
-
-      
       </div>
 
+      {/* Main Content */}
       <div className="flex-1 flex flex-col">
+        {/* Top Navbar */}
         <div className="flex items-center justify-end p-4 bg-blue-600 shadow">
-          {/* Icons */}
-          <div className="flex items-center space-x-4 text-gray-700">
+          <div className="flex items-center space-x-4 text-white">
             <Home
               className="h-5 w-5 cursor-pointer"
               onClick={() => navigate("/")}
