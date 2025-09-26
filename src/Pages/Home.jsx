@@ -1,5 +1,4 @@
 import Navbar from "../components/Navbar";
-import GetStarted from "../components/GetStarted";
 import heroimg from "../assets/heroImg.png";
 import { Rocket } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -131,6 +130,7 @@ const HomePage = () => {
       <section>
         <Navbar />
       </section>
+      {/* Main Hero Section */}
       <section
         id="home"
         className="min-h-screen flex items-center bg-gradient-to-br from-blue-50 to-indigo-100"
@@ -175,9 +175,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      {/* Additional Sections */}
-      {/* ////////////////////////////////////////////////////////////////////////////////// */}
-
+      {/* Services Section */}
       <section id="services">
         <style jsx>{`
           .perspective-1000 {
@@ -208,7 +206,7 @@ const HomePage = () => {
         {/* Service Section 1 - College/Institute Platform */}
         <div className="w-full mb-10">
           <div className="max-w-7xl">
-            <div className="flex flex-col lg:flex-row items-center bg-blue-50 rounded-r-full shadow-xl border-10 border-blue-500 border-l-0 overflow-hidden">
+            <div className="flex flex-col lg:flex-row items-center bg-blue-50 lg:rounded-r-full rounded-r-0 shadow-xl border-10 border-blue-500 border-l-0 border-r-0 lg:border-r-10 overflow-hidden">
               {/* Content Side */}
               <div className="w-full lg:w-full p-12 lg:p-16">
                 <div className="flex items-center mb-6">
@@ -296,7 +294,7 @@ const HomePage = () => {
         {/* Service Section 2 - Student Wellness Platform */}
         <div className="w-full mb-10">
           <div className="max-w-7xl ml-auto">
-            <div className="flex flex-col lg:flex-row items-center bg-green-50 rounded-l-full shadow-xl border-10 border-green-500 border-r-0 overflow-hidden">
+            <div className="flex flex-col lg:flex-row items-center bg-green-50 lg:rounded-l-full rounded-l-0 shadow-xl border-10 border-green-500 border-r-0 border-l-0 lg:border-l-10 overflow-hidden">
               {/* Content Side */}
               <div className="w-full flex flex-col lg:w-full p-12 lg:p-16 ">
                 <div className="flex items-center mb-6">
@@ -388,7 +386,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
+      {/* Features Section */}
       <section id="features">
         <div className="w-full px-4 py-20">
           <div className="max-w-7xl mx-auto">
@@ -448,7 +446,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
+      {/* FAQ Section */}
       <section
         className="bg-gray-50 text-gray-900 py-20 px-6 md:px-24"
         id="faq"
