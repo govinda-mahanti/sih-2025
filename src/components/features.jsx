@@ -9,6 +9,9 @@ import {
   MapPin,
 } from "lucide-react";
 
+
+import VR from "../Students/VR";
+
 export default function StudentFacilities() {
   const facilities = [
     {
@@ -207,6 +210,8 @@ export default function StudentFacilities() {
           </div>
         </div> */}
       </div>
+
+      
     </div>
   );
 }

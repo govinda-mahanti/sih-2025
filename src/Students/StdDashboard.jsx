@@ -14,6 +14,9 @@ import {
   User,
   MapPin,
   Star,
+  Activity,
+  Monitor,
+  Mic
 } from "lucide-react";
 
 const StudentDashboard = () => {
@@ -92,45 +95,63 @@ const StudentDashboard = () => {
     },
   ];
 
-  // Wellness resources
-  const wellnessResources = [
-    {
-      title: "AI Video Consultation",
-      description: "Talk to AI counselor via video call",
-      icon: Video,
-      color: "bg-blue-500",
-    },
-    {
-      title: "Anonymous Doctor Call",
-      description: "Private consultation with psychiatrist",
-      icon: Phone,
-      color: "bg-green-500",
-    },
-    {
-      title: "VR Environment",
-      description: "Immersive therapy with mind sensors",
-      icon: Brain,
-      color: "bg-purple-500",
-    },
-    {
-      title: "AI Character Call",
-      description: "Voice support from AI companion",
-      icon: Headphones,
-      color: "bg-orange-500",
-    },
-    {
-      title: "Volunteer Connect",
-      description: "Connect with peer counselors",
-      icon: Users,
-      color: "bg-pink-500",
-    },
-    {
-      title: "Yoga Sessions",
-      description: "College wellness programs",
-      icon: Heart,
-      color: "bg-teal-500",
-    },
-  ];
+// Wellness resources
+const wellnessResources = [
+  {
+    title: "AI Video Consultation",
+    description: "Talk to AI counselor via video call",
+    icon: Video,
+    color: "bg-blue-500",
+  },
+  {
+    title: "Anonymous Doctor Call",
+    description: "Private consultation with psychiatrist",
+    icon: Phone,
+    color: "bg-green-500",
+  },
+  {
+    title: "VR Environment",
+    description: "Immersive therapy with mind sensors",
+    icon: Brain,
+    color: "bg-purple-500",
+  },
+  {
+    title: "AI Character Call",
+    description: "Voice support from AI companion",
+    icon: Headphones,
+    color: "bg-orange-500",
+  },
+  {
+    title: "Volunteer Connect",
+    description: "Connect with peer counselors",
+    icon: Users,
+    color: "bg-pink-500",
+  },
+  {
+    title: "Yoga Sessions",
+    description: "College wellness programs",
+    icon: Heart,
+    color: "bg-teal-500",
+  },
+  {
+    title: "Interactive Yoga Session",
+    description: "Guided yoga classes with live instruction",
+    icon: Activity,
+    color: "bg-emerald-500",
+  },
+  {
+    title: "Video Therapy",
+    description: "Professional therapy sessions via video",
+    icon: Monitor,
+    color: "bg-indigo-500",
+  },
+  {
+    title: "Audio Therapy",
+    description: "Voice-only therapeutic sessions",
+    icon: Mic,
+    color: "bg-rose-500",
+  },
+];
 
   // Get mood color
   const getMoodColor = (mood) => {

@@ -62,11 +62,12 @@ const App = () => {
           <Route path="appointment" element={<PsyAppointment />} />
           <Route path="calender" element={<PsyCalendar />} />
         </Route>
+
+        
         <Route path="/stdregister" element={<StdRegister />} />
         <Route path="/student/home" element={<StdHomePg />} />
 
-          <Route path="calendar" element={<PsyCalendar />} />
-        </Route>
+      
 
         <Route path="/student" element={<StdLayout />}>
           <Route path="dashboard" element={<StdDashboard />} />
