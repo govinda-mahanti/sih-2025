@@ -17,11 +17,15 @@ import CnlDashboard from "./Counsellor/CnlDashboard";
 
 import PsyLayout from "./Psychiatrist/PsyLayout";
 import PsyDashboard from "./Psychiatrist/PsyDashboard";
-
+import StdRegister from "./Students/StdRegister";
 import StdLayout from "./Students/StdLayout";
 import StdDashboard from "./Students/StdDashboard";
 import StdSessions from "./Students/StdSessions";
 import StdProfile from "./Students/StdProfile";
+
+import CollegeRegistration from "./College/ClgRegister";
+
+
 import PsyAppointment from "./Psychiatrist/PsyAppointment";
 import PsyCalendar from "./Psychiatrist/PsyCalendar";
 const App = () => {
@@ -34,7 +38,7 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/aboutus" element={<AboutUs />} />
         </Route>
-
+        <Route path="/clgregister" element={<CollegeRegistration />} />
         <Route path="/college" element={<ClgLayout />}>
           <Route path="dashboard" element={<CollegeDashboard />} />
           <Route path="students" element={<ClgStudent />} />
@@ -48,8 +52,8 @@ const App = () => {
 
         <Route path="/psychiatrist" element={<PsyLayout />}>
           <Route path="dashboard" element={<PsyDashboard />} />
-              <Route path="appointment" element={<PsyAppointment />} />
-               <Route path="calender" element={<PsyCalendar />} /> 
+          <Route path="appointment" element={<PsyAppointment />} />
+          <Route path="calendar" element={<PsyCalendar />} />
         </Route>
 
         <Route path="/student" element={<StdLayout />}>
