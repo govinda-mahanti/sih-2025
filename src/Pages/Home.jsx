@@ -1,9 +1,15 @@
 import Navbar from "../components/Navbar";
+import GetStarted from "../components/GetStarted";
+
 import heroimg from "../assets/heroImg.png";
 import { Rocket } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import YogaModel from "../components/YogaModel"; // Import the 3D model component
+
 const FeatureCard = ({ name, image, shortInfo, details }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -119,7 +125,7 @@ const faqs = [
 
 const HomePage = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
-
+  const navigate = useNavigate();
   const toggleFAQ = (index) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
@@ -164,12 +170,8 @@ const HomePage = () => {
 
             {/* Right Photo */}
             <div className="relative">
-              <div className="relative z-10">
-                <img
-                  src={heroimg}
-                  alt="Team collaboration"
-                  /*   className="rounded-2xl shadow-2xl w-full h-96 lg:h-[500px] object-cover" */
-                />
+              <div className="relative z-5">
+                <YogaModel />
               </div>
             </div>
           </div>
@@ -283,7 +285,10 @@ const HomePage = () => {
                   </div>
                 </div>
 
-                <button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-10 py-4 rounded-xl hover:from-blue-700 hover:to-blue-800 transition duration-300 font-semibold text-lg shadow-lg">
+                <button
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-10 py-4 rounded-xl hover:from-blue-700 hover:to-blue-800 transition duration-300 font-semibold text-lg shadow-lg"
+                  onClick={() => navigate("/clgregister")}
+                >
                   Register Your Institution
                 </button>
               </div>
@@ -378,7 +383,10 @@ const HomePage = () => {
                   </div>
                 </div>
 
-                <button className="bg-gradient-to-r from-green-600 to-green-700 text-white px-10 py-4 rounded-xl hover:from-green-700 hover:to-green-800 transition duration-300 font-semibold text-lg shadow-lg ml-auto">
+                <button
+                  className="bg-gradient-to-r from-green-600 to-green-700 text-white px-10 py-4 rounded-xl hover:from-green-700 hover:to-green-800 transition duration-300 font-semibold text-lg shadow-lg ml-auto"
+                  onClick={() => navigate("/student/home")}
+                >
                   Start Your Wellness Journey
                 </button>
               </div>
