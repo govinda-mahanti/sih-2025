@@ -56,6 +56,10 @@ const App = () => {
         </Route>
         <Route path="/stdregister" element={<StdRegister />} />
         <Route path="/student/home" element={<StdHomePg />} />
+
+          <Route path="calendar" element={<PsyCalendar />} />
+        </Route>
+
         <Route path="/student" element={<StdLayout />}>
           <Route path="dashboard" element={<StdDashboard />} />
           <Route path="profile" element={<StdProfile />} />
