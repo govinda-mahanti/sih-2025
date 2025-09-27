@@ -115,9 +115,9 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
             <div className="flex items-center space-x-1 text-sm text-gray-400">
-              <span>© 2025 Smart India Hackathon Project. Made with</span>
-              <Heart className="w-4 h-4 text-red-500 fill-current" />
-              <span>by our team.</span>
+              <span>© 2025 Smart India Hackathon Project. Made </span>
+
+              <span>by our Meta Achievers team.</span>
             </div>
             <div className="flex items-center space-x-6 text-sm">
               <a

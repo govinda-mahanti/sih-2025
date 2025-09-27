@@ -22,7 +22,7 @@ import StdLayout from "./Students/StdLayout";
 import StdDashboard from "./Students/StdDashboard";
 import StdSessions from "./Students/StdSessions";
 import StdProfile from "./Students/StdProfile";
-
+import StdHomePg from "./Students/StdHomePg";
 import CollegeRegistration from "./College/ClgRegister";
 
 import PsyAppointment from "./Psychiatrist/PsyAppointment";
@@ -55,6 +55,7 @@ const App = () => {
           <Route path="calender" element={<PsyCalendar />} />
         </Route>
         <Route path="/stdregister" element={<StdRegister />} />
+        <Route path="/student/home" element={<StdHomePg />} />
         <Route path="/student" element={<StdLayout />}>
           <Route path="dashboard" element={<StdDashboard />} />
           <Route path="profile" element={<StdProfile />} />
