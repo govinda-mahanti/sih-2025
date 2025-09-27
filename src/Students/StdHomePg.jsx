@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import StdHeader from "./StdHeader";
 import EmotionCheckin from "../components/Emoji";
 import StudentFacilities from "../components/features";
@@ -12,9 +12,369 @@ import {
   MessageCircle,
   Heart,
   Shield,
+  X,
 } from "lucide-react";
 
+const AssessmentModal = ({ isOpen, onClose }) => {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState({});
+
+  const questions = [
+    {
+      id: "current_mood",
+      question: "How are you feeling right now?",
+      type: "scale",
+      scale: {
+        min: 1,
+        max: 10,
+        minLabel: "Very Bad",
+        maxLabel: "Very Good",
+      },
+      required: false,
+    },
+    {
+      id: "main_concern",
+      question: "What's the main thing on your mind today?",
+      type: "textarea",
+      placeholder:
+        "Share what's bothering you or what you'd like support with...",
+      required: false,
+    },
+    {
+      id: "previous_therapy",
+      question: "Have you ever spoken with a counselor or therapist before?",
+      type: "radio",
+      options: [
+        "Yes, recently (within last 6 months)",
+        "Yes, but it was a while ago",
+        "No, this is my first time",
+        "I prefer not to say",
+      ],
+      required: false,
+    },
+    {
+      id: "trauma_history",
+      question:
+        "Have you experienced any traumatic events that still affect you?",
+      type: "checkbox",
+      options: [
+        "Academic pressure/failure",
+        "Family conflicts",
+        "Relationship issues",
+        "Financial stress",
+        "Health concerns",
+        "Loss of a loved one",
+        "Bullying or harassment",
+        "Accident or injury",
+        "Other traumatic experience",
+        "Prefer not to answer",
+      ],
+      required: false,
+      sensitive: true,
+    },
+    {
+      id: "support_system",
+      question: "Who do you usually turn to for support?",
+      type: "checkbox",
+      options: [
+        "Family members",
+        "Friends",
+        "Roommates/dormmates",
+        "Teachers/professors",
+        "Campus counselors",
+        "Religious/spiritual leaders",
+        "Online communities",
+        "I don't have anyone to talk to",
+        "Prefer not to say",
+      ],
+      required: false,
+    },
+    {
+      id: "symptoms",
+      question:
+        "Have you been experiencing any of these recently? (Check all that apply)",
+      type: "checkbox",
+      options: [
+        "Difficulty sleeping",
+        "Changes in appetite",
+        "Feeling anxious or worried",
+        "Feeling sad or hopeless",
+        "Difficulty concentrating",
+        "Panic attacks",
+        "Social withdrawal",
+        "Thoughts of self-harm",
+        "None of the above",
+        "Prefer not to answer",
+      ],
+      required: false,
+      sensitive: true,
+    },
+    {
+      id: "goals",
+      question: "What would you like to achieve through our conversations?",
+      type: "checkbox",
+      options: [
+        "Better stress management",
+        "Improved mood",
+        "Better sleep",
+        "Social confidence",
+        "Academic performance",
+        "Relationship skills",
+        "Coping strategies",
+        "Just someone to listen",
+        "I'm not sure yet",
+      ],
+      required: false,
+    },
+  ];
+
+  if (!isOpen) return null;
+
+  const handleAnswerChange = (questionId, value) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [questionId]: value,
+    }));
+  };
+
+  const nextQuestion = () => {
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      handleSubmit();
+    }
+  };
+
+  const skipQuestion = () => {
+    handleAnswerChange(questions[currentQuestion].id, "skipped");
+    nextQuestion();
+  };
+
+  const previousQuestion = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+    }
+  };
+
+  const handleSubmit = () => {
+    console.log("Assessment completed:", answers);
+    onClose();
+    alert(
+      "Thank you for sharing. Let's begin your mental wellness journey together."
+    );
+  };
+
+  const currentQ = questions[currentQuestion];
+  const progress = ((currentQuestion + 1) / questions.length) * 100;
+
+  const renderQuestion = (question) => {
+    const currentAnswer = answers[question.id] || "";
+
+    switch (question.type) {
+      case "scale":
+        return (
+          <div className="space-y-4">
+            <div className="flex justify-between text-sm text-gray-600">
+              <span>{question.scale.minLabel}</span>
+              <span>{question.scale.maxLabel}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              {Array.from({ length: question.scale.max }, (_, i) => (
+                <button
+                  key={i + 1}
+                  onClick={() => handleAnswerChange(question.id, i + 1)}
+                  className={`w-10 h-10 rounded-full border-2 flex items-center justify-center font-medium transition-all ${
+                    currentAnswer === i + 1
+                      ? "bg-blue-500 text-white border-blue-500"
+                      : "border-gray-300 hover:border-blue-400 text-gray-600"
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+          </div>
+        );
+
+      case "textarea":
+        return (
+          <textarea
+            value={currentAnswer}
+            onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+            placeholder={question.placeholder}
+            rows={4}
+            className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+          />
+        );
+
+      case "radio":
+        return (
+          <div className="space-y-3">
+            {question.options.map((option, index) => (
+              <button
+                key={index}
+                onClick={() => handleAnswerChange(question.id, option)}
+                className={`w-full text-left p-4 rounded-lg border transition-all ${
+                  currentAnswer === option
+                    ? "bg-blue-50 border-blue-500 text-blue-700"
+                    : "border-gray-200 hover:border-gray-300 text-gray-700"
+                }`}
+              >
+                <div className="flex items-center">
+                  <div
+                    className={`w-4 h-4 rounded-full mr-3 ${
+                      currentAnswer === option
+                        ? "bg-blue-500"
+                        : "border-2 border-gray-300"
+                    }`}
+                  />
+                  {option}
+                </div>
+              </button>
+            ))}
+          </div>
+        );
+
+      case "checkbox":
+        const selectedOptions = Array.isArray(currentAnswer)
+          ? currentAnswer
+          : [];
+        return (
+          <div className="space-y-3">
+            {question.options.map((option, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  const isSelected = selectedOptions.includes(option);
+                  const newSelection = isSelected
+                    ? selectedOptions.filter((item) => item !== option)
+                    : [...selectedOptions, option];
+                  handleAnswerChange(question.id, newSelection);
+                }}
+                className={`w-full text-left p-4 rounded-lg border transition-all ${
+                  selectedOptions.includes(option)
+                    ? "bg-blue-50 border-blue-500 text-blue-700"
+                    : "border-gray-200 hover:border-gray-300 text-gray-700"
+                }`}
+              >
+                <div className="flex items-center">
+                  <div
+                    className={`w-4 h-4 rounded mr-3 flex items-center justify-center ${
+                      selectedOptions.includes(option)
+                        ? "bg-blue-500"
+                        : "border-2 border-gray-300"
+                    }`}
+                  >
+                    {selectedOptions.includes(option) && (
+                      <span className="text-white text-xs">✓</span>
+                    )}
+                  </div>
+                  {option}
+                </div>
+              </button>
+            ))}
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        {/* Header */}
+        <div className="p-6 border-b border-gray-200">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center space-x-3">
+              <Brain className="w-6 h-6 text-blue-600" />
+              <h2 className="text-xl font-semibold text-gray-800">
+                Mental Wellness Assessment
+              </h2>
+            </div>
+            <button
+              onClick={onClose}
+              className="text-gray-500 hover:text-gray-700 p-2"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Progress Bar */}
+          <div className="w-full bg-gray-200 rounded-full h-2">
+            <div
+              className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+          <p className="text-sm text-gray-600 mt-2">
+            Question {currentQuestion + 1} of {questions.length}
+          </p>
+        </div>
+
+        {/* Content */}
+        <div className="p-6">
+          {currentQ?.sensitive && (
+            <div className="mb-4 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-r-lg">
+              <div className="flex items-center">
+                <Shield className="w-5 h-5 text-yellow-600 mr-2" />
+                <p className="text-sm text-yellow-700">
+                  This is a sensitive question. Your privacy is protected, and
+                  you can skip if you're not comfortable answering.
+                </p>
+              </div>
+            </div>
+          )}
+
+          <h3 className="text-lg font-medium text-gray-800 mb-6">
+            {currentQ?.question}
+          </h3>
+
+          <div className="mb-8">{renderQuestion(currentQ)}</div>
+        </div>
+
+        {/* Footer */}
+        <div className="p-6 border-t border-gray-200 bg-gray-50">
+          <div className="flex justify-between">
+            <button
+              onClick={previousQuestion}
+              disabled={currentQuestion === 0}
+              className={`px-6 py-2 rounded-lg font-medium transition-colors ${
+                currentQuestion === 0
+                  ? "text-gray-400 cursor-not-allowed"
+                  : "text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              Previous
+            </button>
+
+            <div className="space-x-3">
+              <button
+                onClick={skipQuestion}
+                className="px-6 py-2 text-gray-600 hover:text-gray-800 font-medium"
+              >
+                Skip
+              </button>
+              <button
+                onClick={nextQuestion}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-colors"
+              >
+                {currentQuestion === questions.length - 1 ? "Complete" : "Next"}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Assessment Modal */}
+    </div>
+  );
+};
+
 const StdHomePg = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const facilities = [
     {
       title: "VR Therapy Sessions",
@@ -113,7 +473,10 @@ const StdHomePg = () => {
             health journey. Let's talk about what's on your mind.
           </p>
 
-          <button className="bg-white border-2 border-purple-100 shadow-md px-8 py-4 rounded-full text-lg font-medium hover:shadow-lg transition-all duration-300 hover:bg-purple-50 hover:scale-105 focus:outline-none z-10">
+          <button
+            className="bg-white border-2 border-purple-100 shadow-md px-8 py-4 rounded-full text-lg font-medium hover:shadow-lg transition-all duration-300 hover:bg-purple-50 hover:scale-105 focus:outline-none z-10"
+            onClick={() => setIsModalOpen(true)}
+          >
             I am ready to talk
           </button>
 
@@ -244,6 +607,12 @@ const StdHomePg = () => {
           </div>
         </div>
       </section>
+
+      {/* Assessment Modal */}
+      <AssessmentModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </>
   );
 };

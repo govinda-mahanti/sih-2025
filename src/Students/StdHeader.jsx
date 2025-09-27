@@ -101,10 +101,7 @@ const StdHeader = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <button
-              onClick={() => handleNavClick("home")}
-              className="flex items-center"
-            >
+            <button onClick={() => navigate("/")} className="flex items-center">
               <div className="w-40 h-8 rounded-lg flex items-center justify-center">
                 <img src={logo1} alt="logo" className="w-80 mr-[5px]" />
               </div>
@@ -151,7 +148,7 @@ const StdHeader = () => {
                 </button>
                 {isProfileDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border py-2 z-50">
-                    <div className="px-4 py-3 border-b">
+                    <div className="px-4 py-3 ">
                       <div className="flex items-center space-x-3">
                         <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
                           <User className="w-6 h-6 text-white" />
@@ -188,7 +185,7 @@ const StdHeader = () => {
                         );
                       })}
                     </div>
-                    <div className="border-t pt-2">
+                    <div className="pt-2">
                       <button className="w-full px-4 py-3 text-left flex items-center space-x-3 text-red-600 hover:bg-red-50">
                         <LogOut className="w-5 h-5" />
                         <span className="font-medium">Sign Out</span>
