@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const FeatureCard = ({ name, image, shortInfo, details }) => {
   const [isFlipped, setIsFlipped] = useState(false);
-  const navigate = useNavigate();
+
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
@@ -121,7 +121,7 @@ const faqs = [
 
 const HomePage = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
-
+  const navigate = useNavigate();
   const toggleFAQ = (index) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
@@ -384,7 +384,10 @@ const HomePage = () => {
                   </div>
                 </div>
 
-                <button className="bg-gradient-to-r from-green-600 to-green-700 text-white px-10 py-4 rounded-xl hover:from-green-700 hover:to-green-800 transition duration-300 font-semibold text-lg shadow-lg ml-auto">
+                <button
+                  className="bg-gradient-to-r from-green-600 to-green-700 text-white px-10 py-4 rounded-xl hover:from-green-700 hover:to-green-800 transition duration-300 font-semibold text-lg shadow-lg ml-auto"
+                  onClick={() => navigate("/student/home")}
+                >
                   Start Your Wellness Journey
                 </button>
               </div>

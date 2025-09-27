@@ -109,8 +109,8 @@ const StdHomePg = () => {
           </h1>
 
           <p className="text-lg md:text-2xl text-gray-500 max-w-2xl mx-auto mb-8 z-10">
-            Roselle is an AI therapist, to understand, and support you through
-            your mental health journey. Let's talk about what's on your mind.
+            Sattava is here, to understand, and support you through your mental
+            health journey. Let's talk about what's on your mind.
           </p>
 
           <button className="bg-white border-2 border-purple-100 shadow-md px-8 py-4 rounded-full text-lg font-medium hover:shadow-lg transition-all duration-300 hover:bg-purple-50 hover:scale-105 focus:outline-none z-10">
