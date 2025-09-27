@@ -1,10 +1,11 @@
 import Navbar from "../components/Navbar";
 import GetStarted from "../components/GetStarted";
-import heroimg from "../assets/heroImg.png";
 import { Rocket } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { useState } from "react";
+import YogaModel from "../components/YogaModel"; // Import the 3D model component
+
 const FeatureCard = ({ name, image, shortInfo, details }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -164,12 +165,8 @@ const HomePage = () => {
 
             {/* Right Photo */}
             <div className="relative">
-              <div className="relative z-10">
-                <img
-                  src={heroimg}
-                  alt="Team collaboration"
-                  /*   className="rounded-2xl shadow-2xl w-full h-96 lg:h-[500px] object-cover" */
-                />
+              <div className="relative z-5">
+                <YogaModel />
               </div>
             </div>
           </div>
