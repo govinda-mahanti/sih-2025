@@ -22,6 +22,10 @@ import StdLayout from "./Students/StdLayout";
 import StdDashboard from "./Students/StdDashboard";
 import StdSessions from "./Students/StdSessions";
 import StdProfile from "./Students/StdProfile";
+import StdAudioTherepy from "./Students/StdAudioTherepy";
+import StdVideoTherepy from "./Students/StdVideoTherepy";
+import StdYoga from "./Students/StdYoga";
+
 import StdHomePg from "./Students/StdHomePg";
 import CollegeRegistration from "./College/ClgRegister";
 
@@ -36,6 +40,10 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/student/audio" element={<StdAudioTherepy />} />
+          <Route path="/student/video" element={<StdVideoTherepy />} />
+          <Route path="/student/yoga" element={<StdYoga />} />
+
         </Route>
         <Route path="/clgregister" element={<CollegeRegistration />} />
         <Route path="/college" element={<ClgLayout />}>
@@ -54,11 +62,12 @@ const App = () => {
           <Route path="appointment" element={<PsyAppointment />} />
           <Route path="calender" element={<PsyCalendar />} />
         </Route>
+
+        
         <Route path="/stdregister" element={<StdRegister />} />
         <Route path="/student/home" element={<StdHomePg />} />
 
-          <Route path="calendar" element={<PsyCalendar />} />
-        </Route>
+      
 
         <Route path="/student" element={<StdLayout />}>
           <Route path="dashboard" element={<StdDashboard />} />
