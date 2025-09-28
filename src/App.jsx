@@ -43,7 +43,6 @@ const App = () => {
           <Route path="/student/audio" element={<StdAudioTherepy />} />
           <Route path="/student/video" element={<StdVideoTherepy />} />
           <Route path="/student/yoga" element={<StdYoga />} />
-
         </Route>
         <Route path="/clgregister" element={<CollegeRegistration />} />
         <Route path="/college" element={<ClgLayout />}>
@@ -63,11 +62,8 @@ const App = () => {
           <Route path="calender" element={<PsyCalendar />} />
         </Route>
 
-        
         <Route path="/stdregister" element={<StdRegister />} />
         <Route path="/student/home" element={<StdHomePg />} />
-
-      
 
         <Route path="/student" element={<StdLayout />}>
           <Route path="dashboard" element={<StdDashboard />} />

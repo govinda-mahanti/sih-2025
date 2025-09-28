@@ -27,9 +27,9 @@ const StdHeader = () => {
   const navLinks = [
     { id: "home", label: "Home" },
     { id: "features", label: "Features" },
+    { id: "resources", label: "Resource Hub" },
     { id: "wellnesscheck", label: "Wellness Check" },
     { id: "community", label: "Community" },
-    { id: "resources", label: "Resources" },
   ];
 
   const profileMenuItems = [
