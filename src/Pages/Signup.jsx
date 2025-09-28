@@ -274,7 +274,7 @@ const SignupPage = () => {
           </button>
         </div>
       </div>
-      <div className="p-4">
+      <div className="p-4 w-200">
         <img src={heroimg} alt="hero" />
       </div>
     </div>
