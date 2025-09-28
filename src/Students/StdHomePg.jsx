@@ -13,19 +13,17 @@ import {
   Heart,
   Shield,
   X,
-  Play, 
-  Headphones, 
-  BookOpen, 
-  ClipboardList, 
-  AlertTriangle, 
+  Play,
+  Headphones,
+  BookOpen,
+  ClipboardList,
+  AlertTriangle,
   Globe,
   ChevronRight,
   Star,
-  Activity
+  Activity,
 } from "lucide-react";
 import Footer from "../components/Footer";
-
-
 
 const AssessmentModal = ({ isOpen, onClose }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -436,92 +434,100 @@ const StdHomePg = () => {
     },
   ];
 
-
   const [hoveredCard, setHoveredCard] = useState(null);
-  
-    const resourceCards = [
-      {
-        id: 1,
-        title: "Educational Videos",
-        description: "Short, engaging videos about mental health topics such as anxiety, depression, stress management, and self-care strategies, presented in regional languages.",
-        icon: Play,
-        bgColor: "bg-gradient-to-br from-pink-100 to-pink-200",
-        iconColor: "text-pink-600",
-        borderColor: "border-pink-200"
-      },
-      {
-        id: 2,
-        title: "Relaxation Video Therapy",
-        description: "Therapeutic video sessions featuring calming visuals, guided imagery, and immersive environments designed to reduce stress and promote mental wellness.",
-        icon: Play,
-        bgColor: "bg-gradient-to-br from-blue-100 to-blue-200",
-        iconColor: "text-blue-600",
-        borderColor: "border-blue-200"
-      },
-      {
-        id: 3,
-        title: "Relaxation Audio",
-        description: "Calming audio resources, mindfulness exercises, and guided relaxation sessions to help students manage stress and improve focus.",
-        icon: Headphones,
-        bgColor: "bg-gradient-to-br from-purple-100 to-purple-200",
-        iconColor: "text-purple-600",
-        borderColor: "border-purple-200"
-      },
-      {
-        id: 4,
-        title: "Mental Wellness Guides",
-        description: "Written and visual guides on coping mechanisms, healthy lifestyle habits, sleep hygiene, time management, and emotional regulation tailored to students.",
-        icon: BookOpen,
-        bgColor: "bg-gradient-to-br from-teal-100 to-teal-200",
-        iconColor: "text-teal-600",
-        borderColor: "border-teal-200"
-      },
-      {
-        id: 5,
-        title: "Self-assessment Tools",
-        description: "Interactive quizzes and screening questionnaires like PHQ-9, GAD-7 to help students understand their mental health status confidentially.",
-        icon: ClipboardList,
-        bgColor: "bg-gradient-to-br from-green-100 to-green-200",
-        iconColor: "text-green-600",
-        borderColor: "border-green-200"
-      },
-      {
-        id: 6,
-        title: "Yoga Sessions",
-        description: "Guided yoga practices specifically designed for students, combining physical movement with mindfulness to reduce stress and improve mental clarity.",
-        icon: Activity,
-        bgColor: "bg-gradient-to-br from-yellow-100 to-orange-200",
-        iconColor: "text-orange-600",
-        borderColor: "border-orange-200"
-      },
-      {
-        id: 7,
-        title: "Crisis Management Resources",
-        description: "Information on actions to take in case of mental health emergencies, helpline numbers, and steps for immediate support.",
-        icon: AlertTriangle,
-        bgColor: "bg-gradient-to-br from-red-100 to-red-200",
-        iconColor: "text-red-600",
-        borderColor: "border-red-200"
-      },
-      {
-        id: 8,
-        title: "Success Stories & Testimonials",
-        description: "Stories from peers who have successfully managed mental health challenges to inspire and motivate users.",
-        icon: Heart,
-        bgColor: "bg-gradient-to-br from-pink-100 to-rose-200",
-        iconColor: "text-rose-600",
-        borderColor: "border-rose-200"
-      },
-      {
-        id: 9,
-        title: "Localized & Culturally Sensitive Content",
-        description: "Content specially crafted to reflect the social and cultural contexts of the students' regions for better relatability and engagement.",
-        icon: Globe,
-        bgColor: "bg-gradient-to-br from-indigo-100 to-indigo-200",
-        iconColor: "text-indigo-600",
-        borderColor: "border-indigo-200"
-      }
-    ];
+
+  const resourceCards = [
+    {
+      id: 1,
+      title: "Educational Videos",
+      description:
+        "Short, engaging videos about mental health topics such as anxiety, depression, stress management, and self-care strategies, presented in regional languages.",
+      icon: Play,
+      bgColor: "bg-gradient-to-br from-pink-100 to-pink-200",
+      iconColor: "text-pink-600",
+      borderColor: "border-pink-200",
+    },
+    {
+      id: 2,
+      title: "Relaxation Video Therapy",
+      description:
+        "Therapeutic video sessions featuring calming visuals, guided imagery, and immersive environments designed to reduce stress and promote mental wellness.",
+      icon: Play,
+      bgColor: "bg-gradient-to-br from-blue-100 to-blue-200",
+      iconColor: "text-blue-600",
+      borderColor: "border-blue-200",
+    },
+    {
+      id: 3,
+      title: "Relaxation Audio",
+      description:
+        "Calming audio resources, mindfulness exercises, and guided relaxation sessions to help students manage stress and improve focus.",
+      icon: Headphones,
+      bgColor: "bg-gradient-to-br from-purple-100 to-purple-200",
+      iconColor: "text-purple-600",
+      borderColor: "border-purple-200",
+    },
+    {
+      id: 4,
+      title: "Mental Wellness Guides",
+      description:
+        "Written and visual guides on coping mechanisms, healthy lifestyle habits, sleep hygiene, time management, and emotional regulation tailored to students.",
+      icon: BookOpen,
+      bgColor: "bg-gradient-to-br from-teal-100 to-teal-200",
+      iconColor: "text-teal-600",
+      borderColor: "border-teal-200",
+    },
+    {
+      id: 5,
+      title: "Self-assessment Tools",
+      description:
+        "Interactive quizzes and screening questionnaires like PHQ-9, GAD-7 to help students understand their mental health status confidentially.",
+      icon: ClipboardList,
+      bgColor: "bg-gradient-to-br from-green-100 to-green-200",
+      iconColor: "text-green-600",
+      borderColor: "border-green-200",
+    },
+    {
+      id: 6,
+      title: "Yoga Sessions",
+      description:
+        "Guided yoga practices specifically designed for students, combining physical movement with mindfulness to reduce stress and improve mental clarity.",
+      icon: Activity,
+      bgColor: "bg-gradient-to-br from-yellow-100 to-orange-200",
+      iconColor: "text-orange-600",
+      borderColor: "border-orange-200",
+    },
+    {
+      id: 7,
+      title: "Crisis Management Resources",
+      description:
+        "Information on actions to take in case of mental health emergencies, helpline numbers, and steps for immediate support.",
+      icon: AlertTriangle,
+      bgColor: "bg-gradient-to-br from-red-100 to-red-200",
+      iconColor: "text-red-600",
+      borderColor: "border-red-200",
+    },
+    {
+      id: 8,
+      title: "Success Stories & Testimonials",
+      description:
+        "Stories from peers who have successfully managed mental health challenges to inspire and motivate users.",
+      icon: Heart,
+      bgColor: "bg-gradient-to-br from-pink-100 to-rose-200",
+      iconColor: "text-rose-600",
+      borderColor: "border-rose-200",
+    },
+    {
+      id: 9,
+      title: "Localized & Culturally Sensitive Content",
+      description:
+        "Content specially crafted to reflect the social and cultural contexts of the students' regions for better relatability and engagement.",
+      icon: Globe,
+      bgColor: "bg-gradient-to-br from-indigo-100 to-indigo-200",
+      iconColor: "text-indigo-600",
+      borderColor: "border-indigo-200",
+    },
+  ];
 
   return (
     <>
@@ -595,64 +601,68 @@ const StdHomePg = () => {
         </div>
       </section>
 
+      <section
+        className="min-h-screen bg-gradient-to-br from-gray-50 to-white py-16 px-4"
+        id="resources"
+      >
+        <div className="max-w-7xl mx-auto">
+          {/* Header Section */}
+          <div className="text-center mb-16">
+            <h1 className="text-5xl font-bold text-gray-800 mb-6">
+              Psychoeducational Resource Hub
+            </h1>
+            <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              Empowering students with knowledge, tools, and ongoing support for
+              their mental wellness journey in an accessible and culturally
+              relevant manner
+            </p>
+          </div>
 
-       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white py-16 px-4">
-      <div className="max-w-7xl mx-auto">
-        
-        {/* Header Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-gray-800 mb-6">
-            Psychoeducational Resource Hub
-          </h1>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-            Empowering students with knowledge, tools, and ongoing support for their mental wellness journey 
-            in an accessible and culturally relevant manner
-          </p>
-        </div>
+          {/* Resource Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {resourceCards.map((card) => {
+              const IconComponent = card.icon;
+              return (
+                <div
+                  key={card.id}
+                  className={`relative ${card.bgColor} rounded-3xl p-8 transition-all duration-300 cursor-pointer border-2 ${card.borderColor} hover:shadow-2xl hover:scale-105 group`}
+                  onMouseEnter={() => setHoveredCard(card.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
+                  {/* Icon Container */}
+                  <div className="mb-6">
+                    <div className="w-16 h-16 bg-white/80 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg">
+                      <IconComponent className={`w-8 h-8 ${card.iconColor}`} />
+                    </div>
+                  </div>
 
-        {/* Resource Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {resourceCards.map((card) => {
-            const IconComponent = card.icon;
-            return (
-              <div
-                key={card.id}
-                className={`relative ${card.bgColor} rounded-3xl p-8 transition-all duration-300 cursor-pointer border-2 ${card.borderColor} hover:shadow-2xl hover:scale-105 group`}
-                onMouseEnter={() => setHoveredCard(card.id)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                {/* Icon Container */}
-                <div className="mb-6">
-                  <div className="w-16 h-16 bg-white/80 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-lg">
-                    <IconComponent className={`w-8 h-8 ${card.iconColor}`} />
+                  {/* Content */}
+                  <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-gray-900 transition-colors">
+                    {card.title}
+                  </h3>
+
+                  <p className="text-gray-700 leading-relaxed text-sm mb-6">
+                    {card.description}
+                  </p>
+
+                  {/* Hover Arrow */}
+                  <div
+                    className={`absolute bottom-6 right-6 transform transition-all duration-300 ${
+                      hoveredCard === card.id
+                        ? "translate-x-0 opacity-100"
+                        : "translate-x-2 opacity-0"
+                    }`}
+                  >
+                    <div className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
+                      <ChevronRight className={`w-5 h-5 ${card.iconColor}`} />
+                    </div>
                   </div>
                 </div>
-
-                {/* Content */}
-                <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-gray-900 transition-colors">
-                  {card.title}
-                </h3>
-                
-                <p className="text-gray-700 leading-relaxed text-sm mb-6">
-                  {card.description}
-                </p>
-
-                {/* Hover Arrow */}
-                <div className={`absolute bottom-6 right-6 transform transition-all duration-300 ${
-                  hoveredCard === card.id ? 'translate-x-0 opacity-100' : 'translate-x-2 opacity-0'
-                }`}>
-                  <div className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
-                    <ChevronRight className={`w-5 h-5 ${card.iconColor}`} />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-
-       
-      </div>
-    </div>
+      </section>
 
       {/* Emotion Check-in */}
       <section id="wellnesscheck" className=" bg-white">
@@ -709,20 +719,12 @@ const StdHomePg = () => {
         </div>
       </section>
 
-
-
-      
-
-     
-
       {/* Assessment Modal */}
       <AssessmentModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
 
-
-      
       <Footer />
 
       {/* {
