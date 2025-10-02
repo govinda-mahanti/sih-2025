@@ -158,7 +158,7 @@ const HomePage = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={() => {
-                    window.location.href = "/signup";
+                    navigate("/signup");
                   }}
                   className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-colors duration-200 flex items-center space-x-3 mx-auto lg:mx-0 mb-12"
                 >
